@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.uxMainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.tempToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gainLossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxLoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sheduledTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxTransactionsListView = new System.Windows.Forms.ListView();
             this.AmountColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DescriptionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxTransactionLabel = new System.Windows.Forms.Label();
             this.uxAddAmountBox = new System.Windows.Forms.TextBox();
             this.uxAddDescriptionBox = new System.Windows.Forms.TextBox();
@@ -53,20 +53,20 @@
             this.uxGoalDescriptionBox = new System.Windows.Forms.TextBox();
             this.uxGoalAmountBox = new System.Windows.Forms.TextBox();
             this.uxMonthLabel = new System.Windows.Forms.Label();
-            this.uxLoseLabel = new System.Windows.Forms.Label();
+            this.uxLossLabel = new System.Windows.Forms.Label();
             this.uxGainLabel = new System.Windows.Forms.Label();
             this.uxLossAmountLabel = new System.Windows.Forms.Label();
             this.uxGainAmountLabel = new System.Windows.Forms.Label();
+            this.uxGoalsHeadingLabel = new System.Windows.Forms.Label();
             this.uxGoalsLabel = new System.Windows.Forms.Label();
-            this.uxGoal1Label = new System.Windows.Forms.Label();
-            this.uxGoal2Label = new System.Windows.Forms.Label();
-            this.uxGoal3Label = new System.Windows.Forms.Label();
             this.uxTransactionRemoveButton = new System.Windows.Forms.Button();
             this.uxCatagoryPicker = new System.Windows.Forms.ComboBox();
             this.uxDateLabel = new System.Windows.Forms.Label();
             this.uxCatagoryLabel = new System.Windows.Forms.Label();
             this.uxGoalDateLabel = new System.Windows.Forms.Label();
-            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NetLabel = new System.Windows.Forms.Label();
+            this.uxNetAmountLabel = new System.Windows.Forms.Label();
+            this.uxViewGoalsButton = new System.Windows.Forms.Button();
             this.uxMainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,29 +74,15 @@
             // 
             this.uxMainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.uxMainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tempToolStripMenuItem,
             this.uxSearchToolStripMenuItem,
             this.gainLossToolStripMenuItem,
-            this.uxLoginToolStripMenuItem});
+            this.uxLoginToolStripMenuItem,
+            this.sheduledTransactionsToolStripMenuItem});
             this.uxMainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.uxMainMenuStrip.Name = "uxMainMenuStrip";
             this.uxMainMenuStrip.Size = new System.Drawing.Size(1226, 28);
             this.uxMainMenuStrip.TabIndex = 0;
             this.uxMainMenuStrip.Text = "menuStrip1";
-            // 
-            // tempToolStripMenuItem
-            // 
-            this.tempToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveLocalToolStripMenuItem});
-            this.tempToolStripMenuItem.Name = "tempToolStripMenuItem";
-            this.tempToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
-            this.tempToolStripMenuItem.Text = "File";
-            // 
-            // saveLocalToolStripMenuItem
-            // 
-            this.saveLocalToolStripMenuItem.Name = "saveLocalToolStripMenuItem";
-            this.saveLocalToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
-            this.saveLocalToolStripMenuItem.Text = "Save Local";
             // 
             // uxSearchToolStripMenuItem
             // 
@@ -118,6 +104,13 @@
             this.uxLoginToolStripMenuItem.Text = "Login";
             this.uxLoginToolStripMenuItem.Click += new System.EventHandler(this.uxLoginToolStripMenuItem_Click);
             // 
+            // sheduledTransactionsToolStripMenuItem
+            // 
+            this.sheduledTransactionsToolStripMenuItem.Name = "sheduledTransactionsToolStripMenuItem";
+            this.sheduledTransactionsToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.sheduledTransactionsToolStripMenuItem.Text = "Sheduled Transactions";
+            this.sheduledTransactionsToolStripMenuItem.Click += new System.EventHandler(this.sheduledTransactionsToolStripMenuItem_Click);
+            // 
             // uxTransactionsListView
             // 
             this.uxTransactionsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -127,9 +120,9 @@
             this.Category,
             this.Id});
             this.uxTransactionsListView.GridLines = true;
-            this.uxTransactionsListView.Location = new System.Drawing.Point(12, 58);
+            this.uxTransactionsListView.Location = new System.Drawing.Point(12, 64);
             this.uxTransactionsListView.Name = "uxTransactionsListView";
-            this.uxTransactionsListView.Size = new System.Drawing.Size(809, 515);
+            this.uxTransactionsListView.Size = new System.Drawing.Size(842, 509);
             this.uxTransactionsListView.TabIndex = 1;
             this.uxTransactionsListView.UseCompatibleStateImageBehavior = false;
             this.uxTransactionsListView.View = System.Windows.Forms.View.Details;
@@ -147,19 +140,24 @@
             // DescriptionColumn
             // 
             this.DescriptionColumn.Text = "Description";
-            this.DescriptionColumn.Width = 400;
+            this.DescriptionColumn.Width = 413;
             // 
             // Category
             // 
             this.Category.Text = "Category";
-            this.Category.Width = 127;
+            this.Category.Width = 149;
+            // 
+            // Id
+            // 
+            this.Id.Text = "Id";
             // 
             // uxTransactionLabel
             // 
             this.uxTransactionLabel.AutoSize = true;
+            this.uxTransactionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxTransactionLabel.Location = new System.Drawing.Point(12, 32);
             this.uxTransactionLabel.Name = "uxTransactionLabel";
-            this.uxTransactionLabel.Size = new System.Drawing.Size(90, 17);
+            this.uxTransactionLabel.Size = new System.Drawing.Size(151, 29);
             this.uxTransactionLabel.TabIndex = 2;
             this.uxTransactionLabel.Text = "Transactions";
             // 
@@ -269,25 +267,28 @@
             // uxMonthLabel
             // 
             this.uxMonthLabel.AutoSize = true;
+            this.uxMonthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxMonthLabel.Location = new System.Drawing.Point(860, 32);
             this.uxMonthLabel.Name = "uxMonthLabel";
-            this.uxMonthLabel.Size = new System.Drawing.Size(47, 17);
+            this.uxMonthLabel.Size = new System.Drawing.Size(79, 29);
             this.uxMonthLabel.TabIndex = 16;
             this.uxMonthLabel.Text = "Month";
             // 
-            // uxLoseLabel
+            // uxLossLabel
             // 
-            this.uxLoseLabel.AutoSize = true;
-            this.uxLoseLabel.Location = new System.Drawing.Point(860, 58);
-            this.uxLoseLabel.Name = "uxLoseLabel";
-            this.uxLoseLabel.Size = new System.Drawing.Size(42, 17);
-            this.uxLoseLabel.TabIndex = 17;
-            this.uxLoseLabel.Text = "Loss:";
+            this.uxLossLabel.AutoSize = true;
+            this.uxLossLabel.ForeColor = System.Drawing.Color.Red;
+            this.uxLossLabel.Location = new System.Drawing.Point(860, 64);
+            this.uxLossLabel.Name = "uxLossLabel";
+            this.uxLossLabel.Size = new System.Drawing.Size(42, 17);
+            this.uxLossLabel.TabIndex = 17;
+            this.uxLossLabel.Text = "Loss:";
             // 
             // uxGainLabel
             // 
             this.uxGainLabel.AutoSize = true;
-            this.uxGainLabel.Location = new System.Drawing.Point(985, 58);
+            this.uxGainLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.uxGainLabel.Location = new System.Drawing.Point(986, 64);
             this.uxGainLabel.Name = "uxGainLabel";
             this.uxGainLabel.Size = new System.Drawing.Size(42, 17);
             this.uxGainLabel.TabIndex = 18;
@@ -296,7 +297,8 @@
             // uxLossAmountLabel
             // 
             this.uxLossAmountLabel.AutoSize = true;
-            this.uxLossAmountLabel.Location = new System.Drawing.Point(909, 58);
+            this.uxLossAmountLabel.ForeColor = System.Drawing.Color.Red;
+            this.uxLossAmountLabel.Location = new System.Drawing.Point(908, 64);
             this.uxLossAmountLabel.Name = "uxLossAmountLabel";
             this.uxLossAmountLabel.Size = new System.Drawing.Size(46, 17);
             this.uxLossAmountLabel.TabIndex = 19;
@@ -305,47 +307,30 @@
             // uxGainAmountLabel
             // 
             this.uxGainAmountLabel.AutoSize = true;
-            this.uxGainAmountLabel.Location = new System.Drawing.Point(1034, 58);
+            this.uxGainAmountLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.uxGainAmountLabel.Location = new System.Drawing.Point(1034, 64);
             this.uxGainAmountLabel.Name = "uxGainAmountLabel";
             this.uxGainAmountLabel.Size = new System.Drawing.Size(46, 17);
             this.uxGainAmountLabel.TabIndex = 20;
             this.uxGainAmountLabel.Text = "label4";
             // 
+            // uxGoalsHeadingLabel
+            // 
+            this.uxGoalsHeadingLabel.AutoSize = true;
+            this.uxGoalsHeadingLabel.Location = new System.Drawing.Point(860, 131);
+            this.uxGoalsHeadingLabel.Name = "uxGoalsHeadingLabel";
+            this.uxGoalsHeadingLabel.Size = new System.Drawing.Size(45, 17);
+            this.uxGoalsHeadingLabel.TabIndex = 21;
+            this.uxGoalsHeadingLabel.Text = "Goals";
+            // 
             // uxGoalsLabel
             // 
             this.uxGoalsLabel.AutoSize = true;
-            this.uxGoalsLabel.Location = new System.Drawing.Point(860, 105);
+            this.uxGoalsLabel.Location = new System.Drawing.Point(876, 162);
             this.uxGoalsLabel.Name = "uxGoalsLabel";
-            this.uxGoalsLabel.Size = new System.Drawing.Size(45, 17);
-            this.uxGoalsLabel.TabIndex = 21;
-            this.uxGoalsLabel.Text = "Goals";
-            // 
-            // uxGoal1Label
-            // 
-            this.uxGoal1Label.AutoSize = true;
-            this.uxGoal1Label.Location = new System.Drawing.Point(876, 136);
-            this.uxGoal1Label.Name = "uxGoal1Label";
-            this.uxGoal1Label.Size = new System.Drawing.Size(43, 17);
-            this.uxGoal1Label.TabIndex = 22;
-            this.uxGoal1Label.Text = "goal1";
-            // 
-            // uxGoal2Label
-            // 
-            this.uxGoal2Label.AutoSize = true;
-            this.uxGoal2Label.Location = new System.Drawing.Point(876, 172);
-            this.uxGoal2Label.Name = "uxGoal2Label";
-            this.uxGoal2Label.Size = new System.Drawing.Size(43, 17);
-            this.uxGoal2Label.TabIndex = 23;
-            this.uxGoal2Label.Text = "goal2";
-            // 
-            // uxGoal3Label
-            // 
-            this.uxGoal3Label.AutoSize = true;
-            this.uxGoal3Label.Location = new System.Drawing.Point(876, 204);
-            this.uxGoal3Label.Name = "uxGoal3Label";
-            this.uxGoal3Label.Size = new System.Drawing.Size(43, 17);
-            this.uxGoal3Label.TabIndex = 24;
-            this.uxGoal3Label.Text = "goal3";
+            this.uxGoalsLabel.Size = new System.Drawing.Size(43, 17);
+            this.uxGoalsLabel.TabIndex = 22;
+            this.uxGoalsLabel.Text = "goal1";
             // 
             // uxTransactionRemoveButton
             // 
@@ -362,6 +347,11 @@
             this.uxCatagoryPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.uxCatagoryPicker.FormattingEnabled = true;
             this.uxCatagoryPicker.Items.AddRange(new object[] {
+            "Bill",
+            "Car/Gas",
+            "Paid",
+            "Clothes",
+            "Online",
             "Food",
             "Other"});
             this.uxCatagoryPicker.Location = new System.Drawing.Point(106, 677);
@@ -396,28 +386,53 @@
             this.uxGoalDateLabel.TabIndex = 29;
             this.uxGoalDateLabel.Text = "Goal Date";
             // 
-            // Id
+            // NetLabel
             // 
-            this.Id.Text = "Id";
+            this.NetLabel.AutoSize = true;
+            this.NetLabel.Location = new System.Drawing.Point(862, 93);
+            this.NetLabel.Name = "NetLabel";
+            this.NetLabel.Size = new System.Drawing.Size(86, 17);
+            this.NetLabel.TabIndex = 30;
+            this.NetLabel.Text = "Net Amount:";
+            // 
+            // uxNetAmountLabel
+            // 
+            this.uxNetAmountLabel.AutoSize = true;
+            this.uxNetAmountLabel.Location = new System.Drawing.Point(954, 93);
+            this.uxNetAmountLabel.Name = "uxNetAmountLabel";
+            this.uxNetAmountLabel.Size = new System.Drawing.Size(46, 17);
+            this.uxNetAmountLabel.TabIndex = 31;
+            this.uxNetAmountLabel.Text = "label4";
+            // 
+            // uxViewGoalsButton
+            // 
+            this.uxViewGoalsButton.Location = new System.Drawing.Point(861, 549);
+            this.uxViewGoalsButton.Name = "uxViewGoalsButton";
+            this.uxViewGoalsButton.Size = new System.Drawing.Size(353, 23);
+            this.uxViewGoalsButton.TabIndex = 32;
+            this.uxViewGoalsButton.Text = "View All Goals";
+            this.uxViewGoalsButton.UseVisualStyleBackColor = true;
+            this.uxViewGoalsButton.Click += new System.EventHandler(this.uxViewGoalsButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1226, 722);
+            this.Controls.Add(this.uxViewGoalsButton);
+            this.Controls.Add(this.uxNetAmountLabel);
+            this.Controls.Add(this.NetLabel);
             this.Controls.Add(this.uxGoalDateLabel);
             this.Controls.Add(this.uxCatagoryLabel);
             this.Controls.Add(this.uxDateLabel);
             this.Controls.Add(this.uxCatagoryPicker);
             this.Controls.Add(this.uxTransactionRemoveButton);
-            this.Controls.Add(this.uxGoal3Label);
-            this.Controls.Add(this.uxGoal2Label);
-            this.Controls.Add(this.uxGoal1Label);
             this.Controls.Add(this.uxGoalsLabel);
+            this.Controls.Add(this.uxGoalsHeadingLabel);
             this.Controls.Add(this.uxGainAmountLabel);
             this.Controls.Add(this.uxLossAmountLabel);
             this.Controls.Add(this.uxGainLabel);
-            this.Controls.Add(this.uxLoseLabel);
+            this.Controls.Add(this.uxLossLabel);
             this.Controls.Add(this.uxMonthLabel);
             this.Controls.Add(this.uxAddGoalButton);
             this.Controls.Add(this.uxGoalDate);
@@ -447,7 +462,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip uxMainMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem tempToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uxSearchToolStripMenuItem;
         private System.Windows.Forms.ListView uxTransactionsListView;
         private System.Windows.Forms.ColumnHeader AmountColumn;
@@ -466,18 +480,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox uxGoalDescriptionBox;
         private System.Windows.Forms.TextBox uxGoalAmountBox;
-        private System.Windows.Forms.ToolStripMenuItem saveLocalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gainLossToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uxLoginToolStripMenuItem;
         private System.Windows.Forms.Label uxMonthLabel;
-        private System.Windows.Forms.Label uxLoseLabel;
+        private System.Windows.Forms.Label uxLossLabel;
         private System.Windows.Forms.Label uxGainLabel;
         private System.Windows.Forms.Label uxLossAmountLabel;
         private System.Windows.Forms.Label uxGainAmountLabel;
+        private System.Windows.Forms.Label uxGoalsHeadingLabel;
         private System.Windows.Forms.Label uxGoalsLabel;
-        private System.Windows.Forms.Label uxGoal1Label;
-        private System.Windows.Forms.Label uxGoal2Label;
-        private System.Windows.Forms.Label uxGoal3Label;
         private System.Windows.Forms.Button uxTransactionRemoveButton;
         private System.Windows.Forms.ComboBox uxCatagoryPicker;
         private System.Windows.Forms.Label uxDateLabel;
@@ -485,6 +496,10 @@
         private System.Windows.Forms.ColumnHeader Category;
         private System.Windows.Forms.Label uxGoalDateLabel;
         private System.Windows.Forms.ColumnHeader Id;
+        private System.Windows.Forms.Label NetLabel;
+        private System.Windows.Forms.Label uxNetAmountLabel;
+        private System.Windows.Forms.ToolStripMenuItem sheduledTransactionsToolStripMenuItem;
+        private System.Windows.Forms.Button uxViewGoalsButton;
     }
 }
 

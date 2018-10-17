@@ -69,6 +69,12 @@
     <Compile Include="GainLossForm.Designer.cs">
       <DependentUpon>GainLossForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GoalsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoalsForm.Designer.cs">
+      <DependentUpon>GoalsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleTransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScheduleTransactionForm.Designer.cs">
+      <DependentUpon>ScheduleTransactionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +103,9 @@
     </Compile>
     <EmbeddedResource Include="GainLossForm.resx">
       <DependentUpon>GainLossForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoalsForm.resx">
+      <DependentUpon>GoalsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -107,6 +122,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ScheduleTransactionForm.resx">
+      <DependentUpon>ScheduleTransactionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>

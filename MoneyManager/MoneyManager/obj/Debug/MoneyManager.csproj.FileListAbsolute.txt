@@ -21,3 +21,5 @@ C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyM
 C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyManager.LoginForm.resources
 C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyManager.GainLossForm.resources
 C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyManager.SearchForm.resources
+C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyManager.ScheduleTransactionForm.resources
+C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyManager.GoalsForm.resources
