@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.uxSearchListView = new System.Windows.Forms.ListView();
-            this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxStartDateSearch = new System.Windows.Forms.DateTimePicker();
             this.uxEndDateSearch = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,6 +45,12 @@
             this.uxAboveRadioButton = new System.Windows.Forms.RadioButton();
             this.uxRangeRadioButton = new System.Windows.Forms.RadioButton();
             this.uxUseDatesBox = new System.Windows.Forms.CheckBox();
+            this.uxEqualRadioButton = new System.Windows.Forms.RadioButton();
+            this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // uxSearchListView
@@ -60,35 +61,19 @@
             this.Description,
             this.Category,
             this.Id});
+            this.uxSearchListView.FullRowSelect = true;
             this.uxSearchListView.GridLines = true;
-            this.uxSearchListView.Location = new System.Drawing.Point(34, 314);
+            this.uxSearchListView.Location = new System.Drawing.Point(34, 230);
             this.uxSearchListView.Name = "uxSearchListView";
-            this.uxSearchListView.Size = new System.Drawing.Size(718, 409);
+            this.uxSearchListView.Size = new System.Drawing.Size(718, 493);
             this.uxSearchListView.TabIndex = 0;
             this.uxSearchListView.UseCompatibleStateImageBehavior = false;
             this.uxSearchListView.View = System.Windows.Forms.View.Details;
             // 
-            // Amount
-            // 
-            this.Amount.Text = "Amount";
-            // 
-            // Date
-            // 
-            this.Date.Text = "Date";
-            // 
-            // Description
-            // 
-            this.Description.Text = "Description";
-            this.Description.Width = 277;
-            // 
-            // Category
-            // 
-            this.Category.Text = "Category";
-            this.Category.Width = 240;
-            // 
             // uxStartDateSearch
             // 
-            this.uxStartDateSearch.Location = new System.Drawing.Point(34, 207);
+            this.uxStartDateSearch.Enabled = false;
+            this.uxStartDateSearch.Location = new System.Drawing.Point(34, 134);
             this.uxStartDateSearch.Name = "uxStartDateSearch";
             this.uxStartDateSearch.Size = new System.Drawing.Size(200, 22);
             this.uxStartDateSearch.TabIndex = 1;
@@ -96,7 +81,8 @@
             // 
             // uxEndDateSearch
             // 
-            this.uxEndDateSearch.Location = new System.Drawing.Point(343, 207);
+            this.uxEndDateSearch.Enabled = false;
+            this.uxEndDateSearch.Location = new System.Drawing.Point(343, 134);
             this.uxEndDateSearch.Name = "uxEndDateSearch";
             this.uxEndDateSearch.Size = new System.Drawing.Size(200, 22);
             this.uxEndDateSearch.TabIndex = 2;
@@ -107,9 +93,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(34, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 17);
+            this.label1.Size = new System.Drawing.Size(127, 17);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Search by amount";
+            this.label1.Text = "Search by amount:";
             // 
             // uxAmountSearchBox
             // 
@@ -130,14 +116,14 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(34, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 17);
+            this.label2.Size = new System.Drawing.Size(132, 17);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Search by keyword";
+            this.label2.Text = "Search by keyword:";
             // 
             // uxRangeBox
             // 
             this.uxRangeBox.Enabled = false;
-            this.uxRangeBox.Location = new System.Drawing.Point(602, 14);
+            this.uxRangeBox.Location = new System.Drawing.Point(681, 15);
             this.uxRangeBox.Name = "uxRangeBox";
             this.uxRangeBox.Size = new System.Drawing.Size(100, 22);
             this.uxRangeBox.TabIndex = 10;
@@ -145,7 +131,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(34, 184);
+            this.label3.Location = new System.Drawing.Point(34, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 17);
             this.label3.TabIndex = 11;
@@ -154,7 +140,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(343, 183);
+            this.label4.Location = new System.Drawing.Point(343, 110);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 17);
             this.label4.TabIndex = 12;
@@ -165,9 +151,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(34, 78);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(133, 17);
+            this.label5.Size = new System.Drawing.Size(137, 17);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Search by Catagory";
+            this.label5.Text = "Search by Catagory:";
             // 
             // uxCatagorySearchBox
             // 
@@ -178,9 +164,9 @@
             // 
             // uxSearchButton
             // 
-            this.uxSearchButton.Location = new System.Drawing.Point(34, 269);
+            this.uxSearchButton.Location = new System.Drawing.Point(34, 162);
             this.uxSearchButton.Name = "uxSearchButton";
-            this.uxSearchButton.Size = new System.Drawing.Size(75, 23);
+            this.uxSearchButton.Size = new System.Drawing.Size(718, 50);
             this.uxSearchButton.TabIndex = 15;
             this.uxSearchButton.Text = "Search";
             this.uxSearchButton.UseVisualStyleBackColor = true;
@@ -189,11 +175,10 @@
             // uxBelowRadioButton
             // 
             this.uxBelowRadioButton.AutoSize = true;
-            this.uxBelowRadioButton.Location = new System.Drawing.Point(346, 14);
+            this.uxBelowRadioButton.Location = new System.Drawing.Point(425, 15);
             this.uxBelowRadioButton.Name = "uxBelowRadioButton";
             this.uxBelowRadioButton.Size = new System.Drawing.Size(66, 21);
             this.uxBelowRadioButton.TabIndex = 16;
-            this.uxBelowRadioButton.TabStop = true;
             this.uxBelowRadioButton.Text = "Below";
             this.uxBelowRadioButton.UseVisualStyleBackColor = true;
             this.uxBelowRadioButton.CheckedChanged += new System.EventHandler(this.uxBelowRadioButton_CheckedChanged);
@@ -201,11 +186,10 @@
             // uxAboveRadioButton
             // 
             this.uxAboveRadioButton.AutoSize = true;
-            this.uxAboveRadioButton.Location = new System.Drawing.Point(430, 14);
+            this.uxAboveRadioButton.Location = new System.Drawing.Point(509, 15);
             this.uxAboveRadioButton.Name = "uxAboveRadioButton";
             this.uxAboveRadioButton.Size = new System.Drawing.Size(69, 21);
             this.uxAboveRadioButton.TabIndex = 17;
-            this.uxAboveRadioButton.TabStop = true;
             this.uxAboveRadioButton.Text = "Above";
             this.uxAboveRadioButton.UseVisualStyleBackColor = true;
             this.uxAboveRadioButton.CheckedChanged += new System.EventHandler(this.uxBelowRadioButton_CheckedChanged);
@@ -213,11 +197,10 @@
             // uxRangeRadioButton
             // 
             this.uxRangeRadioButton.AutoSize = true;
-            this.uxRangeRadioButton.Location = new System.Drawing.Point(516, 14);
+            this.uxRangeRadioButton.Location = new System.Drawing.Point(595, 15);
             this.uxRangeRadioButton.Name = "uxRangeRadioButton";
             this.uxRangeRadioButton.Size = new System.Drawing.Size(71, 21);
             this.uxRangeRadioButton.TabIndex = 18;
-            this.uxRangeRadioButton.TabStop = true;
             this.uxRangeRadioButton.Text = "Range";
             this.uxRangeRadioButton.UseVisualStyleBackColor = true;
             this.uxRangeRadioButton.CheckedChanged += new System.EventHandler(this.uxBelowRadioButton_CheckedChanged);
@@ -225,18 +208,55 @@
             // uxUseDatesBox
             // 
             this.uxUseDatesBox.AutoSize = true;
-            this.uxUseDatesBox.Location = new System.Drawing.Point(611, 207);
+            this.uxUseDatesBox.Location = new System.Drawing.Point(611, 134);
             this.uxUseDatesBox.Name = "uxUseDatesBox";
             this.uxUseDatesBox.Size = new System.Drawing.Size(96, 21);
             this.uxUseDatesBox.TabIndex = 19;
             this.uxUseDatesBox.Text = "Use Dates";
             this.uxUseDatesBox.UseVisualStyleBackColor = true;
+            this.uxUseDatesBox.CheckedChanged += new System.EventHandler(this.uxUseDatesBox_CheckedChanged);
+            // 
+            // uxEqualRadioButton
+            // 
+            this.uxEqualRadioButton.AutoSize = true;
+            this.uxEqualRadioButton.Checked = true;
+            this.uxEqualRadioButton.Location = new System.Drawing.Point(347, 15);
+            this.uxEqualRadioButton.Name = "uxEqualRadioButton";
+            this.uxEqualRadioButton.Size = new System.Drawing.Size(63, 21);
+            this.uxEqualRadioButton.TabIndex = 20;
+            this.uxEqualRadioButton.TabStop = true;
+            this.uxEqualRadioButton.Text = "Exact";
+            this.uxEqualRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // Amount
+            // 
+            this.Amount.Text = "Amount";
+            // 
+            // Date
+            // 
+            this.Date.Text = "Date";
+            this.Date.Width = 140;
+            // 
+            // Description
+            // 
+            this.Description.Text = "Description";
+            this.Description.Width = 200;
+            // 
+            // Category
+            // 
+            this.Category.Text = "Category";
+            this.Category.Width = 80;
+            // 
+            // Id
+            // 
+            this.Id.Text = "Id";
             // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 735);
+            this.Controls.Add(this.uxEqualRadioButton);
             this.Controls.Add(this.uxUseDatesBox);
             this.Controls.Add(this.uxRangeRadioButton);
             this.Controls.Add(this.uxAboveRadioButton);
@@ -255,7 +275,7 @@
             this.Controls.Add(this.uxStartDateSearch);
             this.Controls.Add(this.uxSearchListView);
             this.Name = "SearchForm";
-            this.Text = "text";
+            this.Text = "Search";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,17 +293,18 @@
         private System.Windows.Forms.TextBox uxRangeBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ColumnHeader Amount;
-        private System.Windows.Forms.ColumnHeader Date;
-        private System.Windows.Forms.ColumnHeader Description;
-        private System.Windows.Forms.ColumnHeader Category;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox uxCatagorySearchBox;
-        private System.Windows.Forms.ColumnHeader Id;
         private System.Windows.Forms.Button uxSearchButton;
         private System.Windows.Forms.RadioButton uxBelowRadioButton;
         private System.Windows.Forms.RadioButton uxAboveRadioButton;
         private System.Windows.Forms.RadioButton uxRangeRadioButton;
         private System.Windows.Forms.CheckBox uxUseDatesBox;
+        private System.Windows.Forms.RadioButton uxEqualRadioButton;
+        private System.Windows.Forms.ColumnHeader Amount;
+        private System.Windows.Forms.ColumnHeader Date;
+        private System.Windows.Forms.ColumnHeader Description;
+        private System.Windows.Forms.ColumnHeader Category;
+        private System.Windows.Forms.ColumnHeader Id;
     }
 }

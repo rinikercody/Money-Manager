@@ -13,10 +13,10 @@ namespace MoneyManager
     public partial class SearchForm : Form
     {
         List<string> _userTransactions;
-        public SearchForm(List<string> userTransactions)
+        public SearchForm(string username)
         {
             InitializeComponent();
-            _userTransactions = userTransactions;
+            _userTransactions = DataManager.getTransactionInfo(username);
         }
 
         public void updateSearchDisplay(int id, double amount, string description, string date, string catagory)
@@ -192,6 +192,20 @@ namespace MoneyManager
             else
             {
                 uxRangeBox.Enabled = false;
+            }
+        }
+
+        private void uxUseDatesBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (uxUseDatesBox.Checked)
+            {
+                uxStartDateSearch.Enabled = true;
+                uxEndDateSearch.Enabled = true;
+            }
+            else
+            {
+                uxStartDateSearch.Enabled = false;
+                uxEndDateSearch.Enabled = false;
             }
         }
     }

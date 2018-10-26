@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 using System.Data.SQLite;
 using System.IO;
-//ffuts
+
 //Save everytime but only open once.
 //Handle when no user is loged in vs loged in
 namespace MoneyManager
@@ -23,26 +23,53 @@ namespace MoneyManager
 
         private List<string> _userGoals = new List<string>();
         private List<string> _userTransactions = new List<string>();
+        private List<string> _scheduledTransactions = new List<string>();
 
         private string _pathToUsers = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\User_Transactions\\";
         private string _pathToGoals = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\User_Goals\\";
+        private string _pathToScheduled = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\Scheduled_Transactions\\";
 
-        private int _transactionCount = 0;
+        private string _username = "Cody2";
+        private int _idCount = -1;
 
         public MainForm()
         {
             InitializeComponent();
             uxTransactionAddButton.Enabled = false;
 
+            //checkScheduleTransactions();
+            _userGoals = DataManager.loadGoals(_username);
+            _userTransactions = DataManager.getTransactionInfo(_username);
+
+            //This is used to make sure no ids are duplicated
+            for (int i = 0; i < _userTransactions.Count; i++)
+            {
+                int id = Convert.ToInt32(_userTransactions[i].Split(',')[0]);
+                if (id > _idCount) _idCount = id;
+            }
+            _idCount++;
+
             //Manage schedule transaction here then update user_transactions
-            getTransactionInfo("Cody2");
-            loadGoals("Cody2");
+            _scheduledTransactions = DataManager.getScheduledTransactions(_username);
+            DateTime test = new DateTime(2018, 12, 15);
+            //checkScheduleTransactions(test, "Cody2");
+            DataManager.saveScheduledTransactions(_scheduledTransactions, _username);
+
+            //Load categories
+            List<string> categories = DataManager.getCategories();
+            for(int i = 0; i < categories.Count; i++)
+            {
+                uxCatagoryPicker.Items.Add(categories[i]);
+            }
+
+            updateDisplay();
             _db.Open();
         }
 
         public void updateDisplay()
         {
             uxTransactionsListView.Items.Clear();
+            _userTransactions = DataManager.getTransactionInfo(_username); //Realod incase othe class did something.
             for (int i = 0; i < _userTransactions.Count; i++)
             {
                 string[] info = _userTransactions[i].Split(',');
@@ -66,17 +93,20 @@ namespace MoneyManager
                 }
                 uxTransactionsListView.Items.Add(item);
             }
+
             //Goals and other stuff update
             uxMonthLabel.Text = getMonth(DateTime.Now.Month);
-            //uxGainAmountLabel
+
             DateTime dt1 = new DateTime(2018, 10, 1, 13, 30, 52); //year,month,day,hour,min,sec
-            DateTime dt2 = new DateTime(2018, 11, 8, 13, 30, 52);
+            DateTime dt2 = new DateTime(2018, 11, 8, 13, 30, 52); 
             double [] gl = getBasicGainLoss(dt1, dt2);
            
-            uxLossAmountLabel.Text = gl[0].ToString();
-            uxGainAmountLabel.Text = gl[1].ToString();
-            double netAmount = gl[1] + gl[0];
+            uxLossAmountLabel.Text = gl[0].ToString(); //Loss
+            uxGainAmountLabel.Text = gl[1].ToString(); //Gain
+            double netAmount = gl[1] + gl[0]; //Net
             uxNetAmountLabel.Text = netAmount.ToString();
+
+
             if(netAmount < 0)
             {
                 NetLabel.ForeColor = Color.Red;
@@ -87,6 +117,7 @@ namespace MoneyManager
                 NetLabel.ForeColor = Color.Green;
                 uxNetAmountLabel.ForeColor = Color.Green;
             }
+
             updateGoals();
         }
 
@@ -114,34 +145,7 @@ namespace MoneyManager
                 }
             }
             return gl;
-        }
-        //stuff
-        public void connectToDataBase(string path)
-        {
-            //Open connection to database. //This method might be removed If the database isnt global
-        }
-
-        public void getTransactionInfo(string username)
-        {
-            if (File.Exists(_pathToUsers + username))
-            {
-                string[] info = new string[10];
-                using (StreamReader sr = new StreamReader(_pathToUsers + username)) //mabey add .txt
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string rawTransactionInfo = sr.ReadLine();
-                        _userTransactions.Add(rawTransactionInfo);
-                        info = rawTransactionInfo.Split(',');
-
-                        //MIGHT MOVE AN MAKE MORE SAVE WITH CONVERTING like after reading in
-                        //MessageBox.Show(info[4]);
-                        updateDisplay();
-                    }
-                }
-                _transactionCount = _userTransactions.Count;
-            }
-        }
+        }    
 
         public string getMonth(int number)
         {
@@ -176,40 +180,18 @@ namespace MoneyManager
             }
         }
 
-
-    public void getGoals(string username)
+        private void addTransaction(double amount, string description, string date, string catagory)
         {
-            if (File.Exists(_pathToGoals + username))
-            {
-                using (StreamReader sr = new StreamReader(_pathToGoals + username)) //mabey add .txt
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        _userTransactions.Add(sr.ReadLine());
-                    }
-                }
-            }
-        }
-
-        private void uxTransactionAddButton_Click(object sender, EventArgs e)
-        {
-            int id = _userTransactions.Count;
-            double amount = Convert.ToDouble(uxAddAmountBox.Text);
-            string description = uxAddDescriptionBox.Text;
-            string date = uxDateAddTransaction.Value.ToString();
-            DateTime dt = uxDateAddTransaction.Value;
-            string catagory = uxCatagoryPicker.Text;
-
-            //SQLiteCommand insertCommand = new SQLiteCommand("INSERT INTO test VALUES(9);",_db);
-            //insertCommand.ExecuteNonQuery();
-
+            int id = _idCount;
+            _idCount++;
             string saveInfo = id + "," + amount + "," + description + "," + date + "," + catagory;
-            
-            if(_userTransactions.Count == 0)
+            DateTime dt = Convert.ToDateTime(date);
+
+            if (_userTransactions.Count == 0)
             {
                 _userTransactions.Add(saveInfo);
             }
-            else if (dt > Convert.ToDateTime(_userTransactions[_userTransactions.Count - 1].Split(',')[3]))
+            else if (dt >= Convert.ToDateTime(_userTransactions[_userTransactions.Count - 1].Split(',')[3]))
             {
                 _userTransactions.Add(saveInfo);
             }
@@ -236,38 +218,53 @@ namespace MoneyManager
                 }
                 _userTransactions = tempList;
             }
+            DataManager.saveTransactionInfo(_userTransactions, _username);
+        }
+
+        private void uxTransactionAddButton_Click(object sender, EventArgs e)
+        {
             
-            saveTransactionInfo("Cody2");
+            double amount = Convert.ToDouble(uxAddAmountBox.Text);
+            string description = uxAddDescriptionBox.Text;
+            string date = uxDateAddTransaction.Value.ToString();
+            string catagory = uxCatagoryPicker.Text;
+            addTransaction(amount, description, date, catagory);
+
             updateDisplay();
         }
-
-        //KEEP ABSOLUTLY ALL SAVING TO OUTSIDE SOURCES IN THIS FUNCTION
-        //WILL HELP LATER IF I WANT TO CHANGE HOW I STORE DATA
-        private void saveTransactionInfo(string username)
-        {
-            string filepath = _pathToUsers + username;
-            //Might change to sql database
-
-            using (StreamWriter sw = File.CreateText(filepath))
-            {
-                for (int i = 0; i < _userTransactions.Count; i++)
-                {
-                    sw.WriteLine(_userTransactions[i]);
-                }
-            }
-            
-        }
-
         
+
         private void uxSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SearchForm sf = new SearchForm(_userTransactions);
-            sf.ShowDialog();
+            SearchForm sf = new SearchForm(_username);
+            sf.ShowDialog(); //Just want to show, Don't want users adding/removing things after form open.
         }
 
         private void uxTransactionRemoveButton_Click(object sender, EventArgs e)
         {
-            //Get transaction id then delete it from the text file and load it back in after
+            if (uxTransactionsListView.SelectedItems.Count > 0)
+            {
+                ListViewItem item = uxTransactionsListView.SelectedItems[0];
+
+                int id = Convert.ToInt32(item.SubItems[4].Text);
+                List<string> tempTransactions = new List<string>();
+                for (int i = 0; i < _userTransactions.Count; i++)
+                {
+                    int checkID = Convert.ToInt32(_userTransactions[i].Split(',')[0]);
+                    if (id == checkID)
+                    {
+
+                    }
+                    else
+                    {
+                        tempTransactions.Add(_userTransactions[i]);
+                    }
+                }
+                _userTransactions = tempTransactions;
+
+                uxTransactionsListView.Items.Remove(item);
+                DataManager.saveTransactionInfo(_userTransactions, _username);
+            }
         }
 
         private void uxLoginToolStripMenuItem_Click(object sender, EventArgs e)
@@ -275,7 +272,7 @@ namespace MoneyManager
             LoginForm lf = new LoginForm();
             if(lf.ShowDialog() == DialogResult.OK)
             {
-                //Check if user is in database or ok to log in.
+                //Add later for testing just use Cody2
             }
         }
 
@@ -298,56 +295,60 @@ namespace MoneyManager
             string description = uxGoalDescriptionBox.Text;
 
             DateTime goalDate = uxGoalDate.Value;
-            TimeSpan tsp = new TimeSpan(10, 0, 0, 0);
+            string saveInfo = amount + "," + description + "," + goalDate.ToString();
 
-            _userGoals.Add(amount + "," + description + "," + goalDate.ToString());
-            saveGoals("Cody2");
+
+            if (_userGoals.Count == 0)
+            {
+                _userGoals.Add(saveInfo);
+            }
+            else if (goalDate >= Convert.ToDateTime(_userGoals[_userGoals.Count - 1].Split(',')[2]))
+            {
+                _userGoals.Add(saveInfo);
+            }
+            else
+            {
+                List<string> temp = new List<string>();
+                for (int i = 0; i < _userGoals.Count; i++)
+                {
+                    DateTime date = Convert.ToDateTime(_userGoals[i].Split(',')[2]);
+
+                    if (goalDate < date)
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            temp.Add(_userGoals[j]);
+                        }
+
+                        temp.Add(saveInfo);
+
+                        for (int j = i; j < _userGoals.Count; j++)
+                        {
+                            temp.Add(_userGoals[j]);
+                        }
+                        break;
+                    }
+                }
+                _userGoals = temp;
+            }
+            DataManager.saveGoals(_userGoals,_username);
             updateGoals();
-
-            /*
-            if (goalDate - DateTime.Now < tsp)
-            {
-                uxGoal1DescriptionLabel.ForeColor = Color.Orange;
-                uxGoal1AmountDateLabel.ForeColor = Color.Orange;
-            }
-
-            uxGoal1DescriptionLabel.Text = description;
-            uxGoal1AmountDateLabel.Text = amount.ToString("c") + goalDate.ToString();
-            */
         }
 
-        private void loadGoals(string username)
-        {
-            if (File.Exists(_pathToGoals + username))
-            {
-                using (StreamReader sr = new StreamReader(_pathToGoals + username))
-                {
-                    _userGoals.Add(sr.ReadLine());
-                }
-            }
-        }
-
-        private void saveGoals(string username)
-        {
-            using (StreamWriter sw  = new StreamWriter(_pathToGoals + username))
-            {
-                for(int i = 0; i < _userGoals.Count; i++)
-                {
-                    sw.WriteLine(_userGoals[i]);
-                }
-            }
-        }
+        
 
         private void updateGoals()
         {
+            _userGoals = DataManager.loadGoals(_username); //Reload goals incase other class messed with them.
             uxGoalsLabel.Text = "";
             uxGoalsLabel.ForeColor = Color.Blue;
+
             for (int i = 0; i < 5 && i < _userGoals.Count; i++)
             {
                 string [] info = _userGoals[i].Split(',');
                 uxGoalsLabel.Text += "Goal " + (i+1) + ":\n";
                 uxGoalsLabel.Text += "Amount: " + info[0] + "\n";
-                uxGoalsLabel.Text += "Description: " + _userGoals[1] + "\n";
+                uxGoalsLabel.Text += "Description: " + info[1] + "\n";
                 uxGoalsLabel.Text += "By: " + info[2] + "\n\n";
             }
         }
@@ -384,16 +385,58 @@ namespace MoneyManager
             }
         }
 
+        private void checkScheduleTransactions(DateTime test,string username)
+        {
+            string[] info;
+            for(int i = 0; i < _scheduledTransactions.Count; i++)
+            {
+                info = _scheduledTransactions[i].Split(',');
+                DateTime dt = Convert.ToDateTime(info[5]);
+                //if(dt <= DateTime.Now)
+                if(dt <= test)
+                {
+                    //Take out scheduled
+                    addTransaction(Convert.ToDouble(info[0]), info[2], info[4], info[3]);
+                    //Now edit scheduled transaction
+                    DateTime endDate = Convert.ToDateTime(info[5]);
+                    string [] frequency = info[6].Split('/');
+                    DateTime newDate = endDate.AddMonths(Convert.ToInt32(frequency[0]));
+                    string newSaveInfo = info[0] + "," + info[1] + "," + info[2] + "," + info[3] + "," + endDate.ToString() + "," + newDate.ToString() + "," + info[6];
+                    _scheduledTransactions[i] = newSaveInfo;
+                }
+            }
+        }
+
         private void sheduledTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ScheduleTransactionForm stf = new ScheduleTransactionForm();
+            ScheduleTransactionForm stf = new ScheduleTransactionForm(_pathToScheduled,"Cody2");
             stf.Show();
         }
 
         private void uxViewGoalsButton_Click(object sender, EventArgs e)
         {
-            GoalsForm gf = new GoalsForm(_userGoals);
+            GoalsForm gf = new GoalsForm(_pathToGoals,_username);
             gf.Show();
+            //Update goal display on main page after
+
+        }
+
+        private void uxTransactionsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (uxTransactionsListView.SelectedItems.Count > 0)
+            {
+                uxTransactionRemoveButton.Enabled = true;
+            }
+            else
+            {
+                uxTransactionRemoveButton.Enabled = false;
+            }
+        }
+
+        private void gainLossToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GainLossForm glf = new GainLossForm(_username);
+            glf.Show();
         }
     } //End class
 } //End namespace

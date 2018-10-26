@@ -43,18 +43,20 @@
             this.TakenOut = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxRemoveTransactionButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.uxFrequencyMonths = new System.Windows.Forms.TextBox();
             this.uxFrequencyWeeks = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(12, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 17);
             this.label1.TabIndex = 0;
@@ -62,7 +64,7 @@
             // 
             // uxAmountBox
             // 
-            this.uxAmountBox.Location = new System.Drawing.Point(102, 14);
+            this.uxAmountBox.Location = new System.Drawing.Point(101, 58);
             this.uxAmountBox.Name = "uxAmountBox";
             this.uxAmountBox.Size = new System.Drawing.Size(353, 22);
             this.uxAmountBox.TabIndex = 1;
@@ -72,15 +74,7 @@
             // 
             this.uxCategoryPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.uxCategoryPicker.FormattingEnabled = true;
-            this.uxCategoryPicker.Items.AddRange(new object[] {
-            "Bill",
-            "Car/Gas",
-            "Paid",
-            "Clothes",
-            "Online",
-            "Food",
-            "Other"});
-            this.uxCategoryPicker.Location = new System.Drawing.Point(102, 82);
+            this.uxCategoryPicker.Location = new System.Drawing.Point(101, 126);
             this.uxCategoryPicker.Name = "uxCategoryPicker";
             this.uxCategoryPicker.Size = new System.Drawing.Size(353, 24);
             this.uxCategoryPicker.TabIndex = 27;
@@ -88,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 88);
+            this.label2.Location = new System.Drawing.Point(11, 132);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 28;
@@ -96,7 +90,7 @@
             // 
             // uxStartDate
             // 
-            this.uxStartDate.Location = new System.Drawing.Point(102, 112);
+            this.uxStartDate.Location = new System.Drawing.Point(101, 156);
             this.uxStartDate.Name = "uxStartDate";
             this.uxStartDate.Size = new System.Drawing.Size(353, 22);
             this.uxStartDate.TabIndex = 29;
@@ -104,7 +98,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 117);
+            this.label3.Location = new System.Drawing.Point(11, 161);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 17);
             this.label3.TabIndex = 30;
@@ -113,9 +107,9 @@
             // uxAddScheduledTransaction
             // 
             this.uxAddScheduledTransaction.Enabled = false;
-            this.uxAddScheduledTransaction.Location = new System.Drawing.Point(12, 281);
+            this.uxAddScheduledTransaction.Location = new System.Drawing.Point(11, 278);
             this.uxAddScheduledTransaction.Name = "uxAddScheduledTransaction";
-            this.uxAddScheduledTransaction.Size = new System.Drawing.Size(443, 23);
+            this.uxAddScheduledTransaction.Size = new System.Drawing.Size(443, 53);
             this.uxAddScheduledTransaction.TabIndex = 38;
             this.uxAddScheduledTransaction.Text = "Add Scheduled Transaction";
             this.uxAddScheduledTransaction.UseVisualStyleBackColor = true;
@@ -124,7 +118,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 47);
+            this.label8.Location = new System.Drawing.Point(11, 91);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(83, 17);
             this.label8.TabIndex = 39;
@@ -132,7 +126,7 @@
             // 
             // uxDescriptionBox
             // 
-            this.uxDescriptionBox.Location = new System.Drawing.Point(102, 42);
+            this.uxDescriptionBox.Location = new System.Drawing.Point(101, 86);
             this.uxDescriptionBox.Name = "uxDescriptionBox";
             this.uxDescriptionBox.Size = new System.Drawing.Size(353, 22);
             this.uxDescriptionBox.TabIndex = 40;
@@ -144,7 +138,9 @@
             this.Amount,
             this.TakenOut,
             this.columnHeader,
-            this.columnHeader1});
+            this.columnHeader1,
+            this.columnHeader2});
+            this.uxScheduledTransactionListView.FullRowSelect = true;
             this.uxScheduledTransactionListView.GridLines = true;
             this.uxScheduledTransactionListView.Location = new System.Drawing.Point(461, 8);
             this.uxScheduledTransactionListView.Name = "uxScheduledTransactionListView";
@@ -177,11 +173,15 @@
             this.columnHeader1.Text = "Description";
             this.columnHeader1.Width = 432;
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Frequency";
+            // 
             // uxRemoveTransactionButton
             // 
-            this.uxRemoveTransactionButton.Location = new System.Drawing.Point(12, 415);
+            this.uxRemoveTransactionButton.Location = new System.Drawing.Point(169, 397);
             this.uxRemoveTransactionButton.Name = "uxRemoveTransactionButton";
-            this.uxRemoveTransactionButton.Size = new System.Drawing.Size(148, 23);
+            this.uxRemoveTransactionButton.Size = new System.Drawing.Size(285, 41);
             this.uxRemoveTransactionButton.TabIndex = 42;
             this.uxRemoveTransactionButton.Text = "Remove Transaction";
             this.uxRemoveTransactionButton.UseVisualStyleBackColor = true;
@@ -190,16 +190,16 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 149);
+            this.label9.Location = new System.Drawing.Point(12, 193);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(108, 17);
+            this.label9.Size = new System.Drawing.Size(79, 17);
             this.label9.TabIndex = 43;
-            this.label9.Text = "Day to take out:";
+            this.label9.Text = "Frequency:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 181);
+            this.label4.Location = new System.Drawing.Point(15, 225);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 17);
             this.label4.TabIndex = 44;
@@ -208,7 +208,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 202);
+            this.label5.Location = new System.Drawing.Point(15, 246);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 17);
             this.label5.TabIndex = 45;
@@ -216,7 +216,7 @@
             // 
             // uxFrequencyMonths
             // 
-            this.uxFrequencyMonths.Location = new System.Drawing.Point(102, 178);
+            this.uxFrequencyMonths.Location = new System.Drawing.Point(101, 222);
             this.uxFrequencyMonths.Name = "uxFrequencyMonths";
             this.uxFrequencyMonths.Size = new System.Drawing.Size(100, 22);
             this.uxFrequencyMonths.TabIndex = 46;
@@ -224,17 +224,27 @@
             // 
             // uxFrequencyWeeks
             // 
-            this.uxFrequencyWeeks.Location = new System.Drawing.Point(102, 206);
+            this.uxFrequencyWeeks.Location = new System.Drawing.Point(101, 250);
             this.uxFrequencyWeeks.Name = "uxFrequencyWeeks";
             this.uxFrequencyWeeks.Size = new System.Drawing.Size(100, 22);
             this.uxFrequencyWeeks.TabIndex = 47;
             this.uxFrequencyWeeks.TextChanged += new System.EventHandler(this.uxFrequencyWeeks_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(346, 17);
+            this.label6.TabIndex = 48;
+            this.label6.Text = "Schedule transactions to be taken out at a future time";
             // 
             // ScheduleTransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1415, 450);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.uxFrequencyWeeks);
             this.Controls.Add(this.uxFrequencyMonths);
             this.Controls.Add(this.label5);
@@ -252,7 +262,7 @@
             this.Controls.Add(this.uxAmountBox);
             this.Controls.Add(this.label1);
             this.Name = "ScheduleTransactionForm";
-            this.Text = "l";
+            this.Text = "Scheduled Transactions";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,5 +291,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox uxFrequencyMonths;
         private System.Windows.Forms.TextBox uxFrequencyWeeks;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Label label6;
     }
 }

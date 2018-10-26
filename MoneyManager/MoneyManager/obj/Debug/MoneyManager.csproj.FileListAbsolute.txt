@@ -23,3 +23,4 @@ C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyM
 C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyManager.SearchForm.resources
 C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyManager.ScheduleTransactionForm.resources
 C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\obj\Debug\MoneyManager.GoalsForm.resources
+C:\Users\rinik\Desktop\Senior Project\MoneyManager\MoneyManager\bin\Debug\Categories.txt

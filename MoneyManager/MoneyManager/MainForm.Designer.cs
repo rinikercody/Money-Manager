@@ -96,6 +96,7 @@
             this.gainLossToolStripMenuItem.Name = "gainLossToolStripMenuItem";
             this.gainLossToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.gainLossToolStripMenuItem.Text = "Gain/Loss";
+            this.gainLossToolStripMenuItem.Click += new System.EventHandler(this.gainLossToolStripMenuItem_Click);
             // 
             // uxLoginToolStripMenuItem
             // 
@@ -119,37 +120,41 @@
             this.DescriptionColumn,
             this.Category,
             this.Id});
+            this.uxTransactionsListView.FullRowSelect = true;
             this.uxTransactionsListView.GridLines = true;
             this.uxTransactionsListView.Location = new System.Drawing.Point(12, 64);
+            this.uxTransactionsListView.MultiSelect = false;
             this.uxTransactionsListView.Name = "uxTransactionsListView";
             this.uxTransactionsListView.Size = new System.Drawing.Size(842, 509);
             this.uxTransactionsListView.TabIndex = 1;
             this.uxTransactionsListView.UseCompatibleStateImageBehavior = false;
             this.uxTransactionsListView.View = System.Windows.Forms.View.Details;
+            this.uxTransactionsListView.SelectedIndexChanged += new System.EventHandler(this.uxTransactionsListView_SelectedIndexChanged);
             // 
             // AmountColumn
             // 
             this.AmountColumn.Text = "Amount";
-            this.AmountColumn.Width = 116;
+            this.AmountColumn.Width = 80;
             // 
             // DateColumn
             // 
             this.DateColumn.Text = "Date";
-            this.DateColumn.Width = 105;
+            this.DateColumn.Width = 115;
             // 
             // DescriptionColumn
             // 
             this.DescriptionColumn.Text = "Description";
-            this.DescriptionColumn.Width = 413;
+            this.DescriptionColumn.Width = 300;
             // 
             // Category
             // 
             this.Category.Text = "Category";
-            this.Category.Width = 149;
+            this.Category.Width = 266;
             // 
             // Id
             // 
             this.Id.Text = "Id";
+            this.Id.Width = 75;
             // 
             // uxTransactionLabel
             // 
@@ -334,6 +339,7 @@
             // 
             // uxTransactionRemoveButton
             // 
+            this.uxTransactionRemoveButton.Enabled = false;
             this.uxTransactionRemoveButton.Location = new System.Drawing.Point(410, 677);
             this.uxTransactionRemoveButton.Name = "uxTransactionRemoveButton";
             this.uxTransactionRemoveButton.Size = new System.Drawing.Size(170, 23);
@@ -346,14 +352,6 @@
             // 
             this.uxCatagoryPicker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.uxCatagoryPicker.FormattingEnabled = true;
-            this.uxCatagoryPicker.Items.AddRange(new object[] {
-            "Bill",
-            "Car/Gas",
-            "Paid",
-            "Clothes",
-            "Online",
-            "Food",
-            "Other"});
             this.uxCatagoryPicker.Location = new System.Drawing.Point(106, 677);
             this.uxCatagoryPicker.Name = "uxCatagoryPicker";
             this.uxCatagoryPicker.Size = new System.Drawing.Size(298, 24);

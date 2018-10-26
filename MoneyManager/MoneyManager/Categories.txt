@@ -1,0 +1,7 @@
+﻿Bill
+Car/Gas
+Paid
+Clothes
+Online
+Food
+Other
