@@ -219,9 +219,9 @@
             // uxAddGoalButton
             // 
             this.uxAddGoalButton.Enabled = false;
-            this.uxAddGoalButton.Location = new System.Drawing.Point(1113, 687);
+            this.uxAddGoalButton.Location = new System.Drawing.Point(1131, 674);
             this.uxAddGoalButton.Name = "uxAddGoalButton";
-            this.uxAddGoalButton.Size = new System.Drawing.Size(75, 23);
+            this.uxAddGoalButton.Size = new System.Drawing.Size(83, 27);
             this.uxAddGoalButton.TabIndex = 15;
             this.uxAddGoalButton.Text = "Add Goal";
             this.uxAddGoalButton.UseVisualStyleBackColor = true;
@@ -229,16 +229,16 @@
             // 
             // uxGoalDate
             // 
-            this.uxGoalDate.Location = new System.Drawing.Point(899, 688);
+            this.uxGoalDate.Location = new System.Drawing.Point(855, 675);
             this.uxGoalDate.Name = "uxGoalDate";
-            this.uxGoalDate.Size = new System.Drawing.Size(200, 22);
+            this.uxGoalDate.Size = new System.Drawing.Size(246, 22);
             this.uxGoalDate.TabIndex = 14;
             this.uxGoalDate.ValueChanged += new System.EventHandler(this.checkGoalButton);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(807, 599);
+            this.label1.Location = new System.Drawing.Point(852, 581);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 17);
             this.label1.TabIndex = 13;
@@ -247,7 +247,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(805, 628);
+            this.label2.Location = new System.Drawing.Point(852, 615);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 17);
             this.label2.TabIndex = 12;
@@ -255,15 +255,16 @@
             // 
             // uxGoalDescriptionBox
             // 
-            this.uxGoalDescriptionBox.Location = new System.Drawing.Point(808, 648);
+            this.uxGoalDescriptionBox.Location = new System.Drawing.Point(971, 612);
+            this.uxGoalDescriptionBox.Multiline = true;
             this.uxGoalDescriptionBox.Name = "uxGoalDescriptionBox";
-            this.uxGoalDescriptionBox.Size = new System.Drawing.Size(408, 22);
+            this.uxGoalDescriptionBox.Size = new System.Drawing.Size(243, 42);
             this.uxGoalDescriptionBox.TabIndex = 11;
             this.uxGoalDescriptionBox.TextChanged += new System.EventHandler(this.checkGoalButton);
             // 
             // uxGoalAmountBox
             // 
-            this.uxGoalAmountBox.Location = new System.Drawing.Point(903, 594);
+            this.uxGoalAmountBox.Location = new System.Drawing.Point(958, 581);
             this.uxGoalAmountBox.Name = "uxGoalAmountBox";
             this.uxGoalAmountBox.Size = new System.Drawing.Size(100, 22);
             this.uxGoalAmountBox.TabIndex = 10;
@@ -282,49 +283,54 @@
             // uxLossLabel
             // 
             this.uxLossLabel.AutoSize = true;
+            this.uxLossLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxLossLabel.ForeColor = System.Drawing.Color.Red;
-            this.uxLossLabel.Location = new System.Drawing.Point(860, 64);
+            this.uxLossLabel.Location = new System.Drawing.Point(610, 592);
             this.uxLossLabel.Name = "uxLossLabel";
-            this.uxLossLabel.Size = new System.Drawing.Size(42, 17);
+            this.uxLossLabel.Size = new System.Drawing.Size(60, 25);
             this.uxLossLabel.TabIndex = 17;
             this.uxLossLabel.Text = "Loss:";
             // 
             // uxGainLabel
             // 
             this.uxGainLabel.AutoSize = true;
+            this.uxGainLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxGainLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.uxGainLabel.Location = new System.Drawing.Point(986, 64);
+            this.uxGainLabel.Location = new System.Drawing.Point(610, 629);
             this.uxGainLabel.Name = "uxGainLabel";
-            this.uxGainLabel.Size = new System.Drawing.Size(42, 17);
+            this.uxGainLabel.Size = new System.Drawing.Size(59, 25);
             this.uxGainLabel.TabIndex = 18;
             this.uxGainLabel.Text = "Gain:";
             // 
             // uxLossAmountLabel
             // 
             this.uxLossAmountLabel.AutoSize = true;
+            this.uxLossAmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxLossAmountLabel.ForeColor = System.Drawing.Color.Red;
-            this.uxLossAmountLabel.Location = new System.Drawing.Point(908, 64);
+            this.uxLossAmountLabel.Location = new System.Drawing.Point(676, 592);
             this.uxLossAmountLabel.Name = "uxLossAmountLabel";
-            this.uxLossAmountLabel.Size = new System.Drawing.Size(46, 17);
+            this.uxLossAmountLabel.Size = new System.Drawing.Size(64, 25);
             this.uxLossAmountLabel.TabIndex = 19;
             this.uxLossAmountLabel.Text = "label3";
             // 
             // uxGainAmountLabel
             // 
             this.uxGainAmountLabel.AutoSize = true;
+            this.uxGainAmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxGainAmountLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.uxGainAmountLabel.Location = new System.Drawing.Point(1034, 64);
+            this.uxGainAmountLabel.Location = new System.Drawing.Point(676, 629);
             this.uxGainAmountLabel.Name = "uxGainAmountLabel";
-            this.uxGainAmountLabel.Size = new System.Drawing.Size(46, 17);
+            this.uxGainAmountLabel.Size = new System.Drawing.Size(64, 25);
             this.uxGainAmountLabel.TabIndex = 20;
             this.uxGainAmountLabel.Text = "label4";
             // 
             // uxGoalsHeadingLabel
             // 
             this.uxGoalsHeadingLabel.AutoSize = true;
+            this.uxGoalsHeadingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxGoalsHeadingLabel.Location = new System.Drawing.Point(860, 131);
             this.uxGoalsHeadingLabel.Name = "uxGoalsHeadingLabel";
-            this.uxGoalsHeadingLabel.Size = new System.Drawing.Size(45, 17);
+            this.uxGoalsHeadingLabel.Size = new System.Drawing.Size(63, 25);
             this.uxGoalsHeadingLabel.TabIndex = 21;
             this.uxGoalsHeadingLabel.Text = "Goals";
             // 
@@ -378,7 +384,7 @@
             // uxGoalDateLabel
             // 
             this.uxGoalDateLabel.AutoSize = true;
-            this.uxGoalDateLabel.Location = new System.Drawing.Point(807, 690);
+            this.uxGoalDateLabel.Location = new System.Drawing.Point(852, 650);
             this.uxGoalDateLabel.Name = "uxGoalDateLabel";
             this.uxGoalDateLabel.Size = new System.Drawing.Size(72, 17);
             this.uxGoalDateLabel.TabIndex = 29;
@@ -387,18 +393,20 @@
             // NetLabel
             // 
             this.NetLabel.AutoSize = true;
-            this.NetLabel.Location = new System.Drawing.Point(862, 93);
+            this.NetLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NetLabel.Location = new System.Drawing.Point(610, 671);
             this.NetLabel.Name = "NetLabel";
-            this.NetLabel.Size = new System.Drawing.Size(86, 17);
+            this.NetLabel.Size = new System.Drawing.Size(48, 25);
             this.NetLabel.TabIndex = 30;
-            this.NetLabel.Text = "Net Amount:";
+            this.NetLabel.Text = "Net:";
             // 
             // uxNetAmountLabel
             // 
             this.uxNetAmountLabel.AutoSize = true;
-            this.uxNetAmountLabel.Location = new System.Drawing.Point(954, 93);
+            this.uxNetAmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxNetAmountLabel.Location = new System.Drawing.Point(676, 671);
             this.uxNetAmountLabel.Name = "uxNetAmountLabel";
-            this.uxNetAmountLabel.Size = new System.Drawing.Size(46, 17);
+            this.uxNetAmountLabel.Size = new System.Drawing.Size(64, 25);
             this.uxNetAmountLabel.TabIndex = 31;
             this.uxNetAmountLabel.Text = "label4";
             // 

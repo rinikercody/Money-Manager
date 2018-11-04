@@ -142,6 +142,7 @@
             this.uxSignUpButton.TabIndex = 11;
             this.uxSignUpButton.Text = "Create Account";
             this.uxSignUpButton.UseVisualStyleBackColor = true;
+            this.uxSignUpButton.Click += new System.EventHandler(this.uxSignUpButton_Click);
             // 
             // LoginForm
             // 

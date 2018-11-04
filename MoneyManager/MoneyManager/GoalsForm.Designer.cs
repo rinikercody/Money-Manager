@@ -48,13 +48,16 @@
             this.amount,
             this.columnHeader1,
             this.columnHeader2});
+            this.uxGoalsListView.FullRowSelect = true;
             this.uxGoalsListView.GridLines = true;
             this.uxGoalsListView.Location = new System.Drawing.Point(13, 13);
+            this.uxGoalsListView.MultiSelect = false;
             this.uxGoalsListView.Name = "uxGoalsListView";
             this.uxGoalsListView.Size = new System.Drawing.Size(775, 575);
             this.uxGoalsListView.TabIndex = 0;
             this.uxGoalsListView.UseCompatibleStateImageBehavior = false;
             this.uxGoalsListView.View = System.Windows.Forms.View.Details;
+            this.uxGoalsListView.SelectedIndexChanged += new System.EventHandler(this.uxGoalsListView_SelectedIndexChanged);
             // 
             // amount
             // 
@@ -132,12 +135,14 @@
             // 
             // uxRemoveGoalButton
             // 
+            this.uxRemoveGoalButton.Enabled = false;
             this.uxRemoveGoalButton.Location = new System.Drawing.Point(652, 635);
             this.uxRemoveGoalButton.Name = "uxRemoveGoalButton";
             this.uxRemoveGoalButton.Size = new System.Drawing.Size(136, 23);
             this.uxRemoveGoalButton.TabIndex = 37;
             this.uxRemoveGoalButton.Text = "Remove Goal";
             this.uxRemoveGoalButton.UseVisualStyleBackColor = true;
+            this.uxRemoveGoalButton.Click += new System.EventHandler(this.uxRemoveGoalButton_Click);
             // 
             // GoalsForm
             // 

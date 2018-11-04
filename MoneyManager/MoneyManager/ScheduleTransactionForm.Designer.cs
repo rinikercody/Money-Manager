@@ -51,6 +51,7 @@
             this.uxFrequencyMonths = new System.Windows.Forms.TextBox();
             this.uxFrequencyWeeks = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.uxOneTimeCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -107,9 +108,9 @@
             // uxAddScheduledTransaction
             // 
             this.uxAddScheduledTransaction.Enabled = false;
-            this.uxAddScheduledTransaction.Location = new System.Drawing.Point(11, 278);
+            this.uxAddScheduledTransaction.Location = new System.Drawing.Point(11, 289);
             this.uxAddScheduledTransaction.Name = "uxAddScheduledTransaction";
-            this.uxAddScheduledTransaction.Size = new System.Drawing.Size(443, 53);
+            this.uxAddScheduledTransaction.Size = new System.Drawing.Size(443, 82);
             this.uxAddScheduledTransaction.TabIndex = 38;
             this.uxAddScheduledTransaction.Text = "Add Scheduled Transaction";
             this.uxAddScheduledTransaction.UseVisualStyleBackColor = true;
@@ -179,9 +180,9 @@
             // 
             // uxRemoveTransactionButton
             // 
-            this.uxRemoveTransactionButton.Location = new System.Drawing.Point(169, 397);
+            this.uxRemoveTransactionButton.Location = new System.Drawing.Point(11, 377);
             this.uxRemoveTransactionButton.Name = "uxRemoveTransactionButton";
-            this.uxRemoveTransactionButton.Size = new System.Drawing.Size(285, 41);
+            this.uxRemoveTransactionButton.Size = new System.Drawing.Size(443, 61);
             this.uxRemoveTransactionButton.TabIndex = 42;
             this.uxRemoveTransactionButton.Text = "Remove Transaction";
             this.uxRemoveTransactionButton.UseVisualStyleBackColor = true;
@@ -208,7 +209,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 246);
+            this.label5.Location = new System.Drawing.Point(15, 253);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 17);
             this.label5.TabIndex = 45;
@@ -233,17 +234,29 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 9);
+            this.label6.Location = new System.Drawing.Point(8, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(346, 17);
             this.label6.TabIndex = 48;
             this.label6.Text = "Schedule transactions to be taken out at a future time";
+            // 
+            // uxOneTimeCheckBox
+            // 
+            this.uxOneTimeCheckBox.AutoSize = true;
+            this.uxOneTimeCheckBox.Location = new System.Drawing.Point(101, 195);
+            this.uxOneTimeCheckBox.Name = "uxOneTimeCheckBox";
+            this.uxOneTimeCheckBox.Size = new System.Drawing.Size(92, 21);
+            this.uxOneTimeCheckBox.TabIndex = 49;
+            this.uxOneTimeCheckBox.Text = "One Time";
+            this.uxOneTimeCheckBox.UseVisualStyleBackColor = true;
+            this.uxOneTimeCheckBox.CheckedChanged += new System.EventHandler(this.uxOneTimeCheckBox_CheckedChanged);
             // 
             // ScheduleTransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1415, 450);
+            this.Controls.Add(this.uxOneTimeCheckBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.uxFrequencyWeeks);
             this.Controls.Add(this.uxFrequencyMonths);
@@ -293,5 +306,6 @@
         private System.Windows.Forms.TextBox uxFrequencyWeeks;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox uxOneTimeCheckBox;
     }
 }

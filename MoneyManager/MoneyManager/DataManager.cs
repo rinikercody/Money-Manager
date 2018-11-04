@@ -10,9 +10,9 @@ namespace MoneyManager
     static class DataManager
     {
 
-        private static string _pathToUsers = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\User_Transactions\\";
-        private static string _pathToGoals = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\User_Goals\\";
-        private static string _pathToScheduledTransactions = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\Scheduled_Transactions\\";
+        private static string _pathToUsers = "User_Transactions\\";
+        private static string _pathToGoals = "User_Goals\\";
+        private static string _pathToScheduledTransactions = "Scheduled_Transactions\\";
 
         public static List<string> loadGoals(string username)
         {

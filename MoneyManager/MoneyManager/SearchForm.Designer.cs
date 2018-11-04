@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.uxSearchListView = new System.Windows.Forms.ListView();
+            this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxStartDateSearch = new System.Windows.Forms.DateTimePicker();
             this.uxEndDateSearch = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,11 +51,6 @@
             this.uxRangeRadioButton = new System.Windows.Forms.RadioButton();
             this.uxUseDatesBox = new System.Windows.Forms.CheckBox();
             this.uxEqualRadioButton = new System.Windows.Forms.RadioButton();
-            this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // uxSearchListView
@@ -69,6 +69,29 @@
             this.uxSearchListView.TabIndex = 0;
             this.uxSearchListView.UseCompatibleStateImageBehavior = false;
             this.uxSearchListView.View = System.Windows.Forms.View.Details;
+            // 
+            // Amount
+            // 
+            this.Amount.Text = "Amount";
+            // 
+            // Date
+            // 
+            this.Date.Text = "Date";
+            this.Date.Width = 140;
+            // 
+            // Description
+            // 
+            this.Description.Text = "Description";
+            this.Description.Width = 200;
+            // 
+            // Category
+            // 
+            this.Category.Text = "Category";
+            this.Category.Width = 80;
+            // 
+            // Id
+            // 
+            this.Id.Text = "Id";
             // 
             // uxStartDateSearch
             // 
@@ -123,7 +146,7 @@
             // uxRangeBox
             // 
             this.uxRangeBox.Enabled = false;
-            this.uxRangeBox.Location = new System.Drawing.Point(681, 15);
+            this.uxRangeBox.Location = new System.Drawing.Point(646, 14);
             this.uxRangeBox.Name = "uxRangeBox";
             this.uxRangeBox.Size = new System.Drawing.Size(100, 22);
             this.uxRangeBox.TabIndex = 10;
@@ -164,7 +187,7 @@
             // 
             // uxSearchButton
             // 
-            this.uxSearchButton.Location = new System.Drawing.Point(34, 162);
+            this.uxSearchButton.Location = new System.Drawing.Point(34, 174);
             this.uxSearchButton.Name = "uxSearchButton";
             this.uxSearchButton.Size = new System.Drawing.Size(718, 50);
             this.uxSearchButton.TabIndex = 15;
@@ -175,7 +198,7 @@
             // uxBelowRadioButton
             // 
             this.uxBelowRadioButton.AutoSize = true;
-            this.uxBelowRadioButton.Location = new System.Drawing.Point(425, 15);
+            this.uxBelowRadioButton.Location = new System.Drawing.Point(390, 14);
             this.uxBelowRadioButton.Name = "uxBelowRadioButton";
             this.uxBelowRadioButton.Size = new System.Drawing.Size(66, 21);
             this.uxBelowRadioButton.TabIndex = 16;
@@ -186,7 +209,7 @@
             // uxAboveRadioButton
             // 
             this.uxAboveRadioButton.AutoSize = true;
-            this.uxAboveRadioButton.Location = new System.Drawing.Point(509, 15);
+            this.uxAboveRadioButton.Location = new System.Drawing.Point(474, 14);
             this.uxAboveRadioButton.Name = "uxAboveRadioButton";
             this.uxAboveRadioButton.Size = new System.Drawing.Size(69, 21);
             this.uxAboveRadioButton.TabIndex = 17;
@@ -197,7 +220,7 @@
             // uxRangeRadioButton
             // 
             this.uxRangeRadioButton.AutoSize = true;
-            this.uxRangeRadioButton.Location = new System.Drawing.Point(595, 15);
+            this.uxRangeRadioButton.Location = new System.Drawing.Point(560, 14);
             this.uxRangeRadioButton.Name = "uxRangeRadioButton";
             this.uxRangeRadioButton.Size = new System.Drawing.Size(71, 21);
             this.uxRangeRadioButton.TabIndex = 18;
@@ -220,7 +243,7 @@
             // 
             this.uxEqualRadioButton.AutoSize = true;
             this.uxEqualRadioButton.Checked = true;
-            this.uxEqualRadioButton.Location = new System.Drawing.Point(347, 15);
+            this.uxEqualRadioButton.Location = new System.Drawing.Point(312, 14);
             this.uxEqualRadioButton.Name = "uxEqualRadioButton";
             this.uxEqualRadioButton.Size = new System.Drawing.Size(63, 21);
             this.uxEqualRadioButton.TabIndex = 20;
@@ -228,34 +251,11 @@
             this.uxEqualRadioButton.Text = "Exact";
             this.uxEqualRadioButton.UseVisualStyleBackColor = true;
             // 
-            // Amount
-            // 
-            this.Amount.Text = "Amount";
-            // 
-            // Date
-            // 
-            this.Date.Text = "Date";
-            this.Date.Width = 140;
-            // 
-            // Description
-            // 
-            this.Description.Text = "Description";
-            this.Description.Width = 200;
-            // 
-            // Category
-            // 
-            this.Category.Text = "Category";
-            this.Category.Width = 80;
-            // 
-            // Id
-            // 
-            this.Id.Text = "Id";
-            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 735);
+            this.ClientSize = new System.Drawing.Size(779, 735);
             this.Controls.Add(this.uxEqualRadioButton);
             this.Controls.Add(this.uxUseDatesBox);
             this.Controls.Add(this.uxRangeRadioButton);

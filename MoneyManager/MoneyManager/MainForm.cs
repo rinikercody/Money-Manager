@@ -8,35 +8,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using System.Data.SQLite;
 using System.IO;
 
 //Save everytime but only open once.
-//Handle when no user is loged in vs loged in
+//Handle when no user is loged in vs loged out
 namespace MoneyManager
 {
-    //Need to handle sorting transactions like by earilest date when put in later
     public partial class MainForm : Form
     {
-        private static string _dbPath = "Data Source=C:\\Users\\rinik\\desktop\\Senior Project\\MoneyManagerDB.db";
-        private SQLiteConnection _db = new SQLiteConnection(_dbPath); //Put file path here, might not make this global
-
+        //All the current users goals in text format.
         private List<string> _userGoals = new List<string>();
+
+        //All the current users transaction info in text format.
         private List<string> _userTransactions = new List<string>();
+
+        //All the current users scheduled Transaction in text format.
         private List<string> _scheduledTransactions = new List<string>();
 
-        private string _pathToUsers = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\User_Transactions\\";
-        private string _pathToGoals = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\User_Goals\\";
-        private string _pathToScheduled = "C:\\users\\rinik\\desktop\\Senior Project\\MoneyManager\\Scheduled_Transactions\\";
+        //The base path to where users transaction data is stored.
+        private string _pathToUsers = "User_Transactions\\";
+        //The base path to where users goal data is stored.
+        private string _pathToGoals = "User_Goals\\";
+        //The base path to where users scheduled transaction data is stored.
+        private string _pathToScheduled = "Scheduled_Transactions\\";
 
+        //The current users of the program
         private string _username = "Cody2";
+
+        //_idCount helps track transactions ids to ensure there are no dublicate transaction ids
         private int _idCount = -1;
 
         public MainForm()
         {
             InitializeComponent();
+            _idCount = -1;
             uxTransactionAddButton.Enabled = false;
-
             //checkScheduleTransactions();
             _userGoals = DataManager.loadGoals(_username);
             _userTransactions = DataManager.getTransactionInfo(_username);
@@ -51,21 +57,23 @@ namespace MoneyManager
 
             //Manage schedule transaction here then update user_transactions
             _scheduledTransactions = DataManager.getScheduledTransactions(_username);
-            DateTime test = new DateTime(2018, 12, 15);
-            //checkScheduleTransactions(test, "Cody2");
+            DateTime test = new DateTime(2018, 11, 15);
+            checkScheduleTransactions(test, "Cody2");
             DataManager.saveScheduledTransactions(_scheduledTransactions, _username);
 
             //Load categories
             List<string> categories = DataManager.getCategories();
-            for(int i = 0; i < categories.Count; i++)
+            for (int i = 0; i < categories.Count; i++)
             {
                 uxCatagoryPicker.Items.Add(categories[i]);
             }
 
             updateDisplay();
-            _db.Open();
         }
 
+        /// <summary>
+        /// Updates all information from the model to main forms display.
+        /// </summary>
         public void updateDisplay()
         {
             uxTransactionsListView.Items.Clear();
@@ -121,6 +129,12 @@ namespace MoneyManager
             updateGoals();
         }
 
+        /// <summary>
+        /// Gets the amount of money spent and gained over a specified time period
+        /// </summary>
+        /// <param name="dt1">Start date</param>
+        /// <param name="dt2">End date</param>
+        /// <returns>A dobule array with [0] being loss and [1] being gain</returns>
         public double[] getBasicGainLoss(DateTime dt1, DateTime dt2)
         {
             double[] gl = new double[2];
@@ -147,6 +161,11 @@ namespace MoneyManager
             return gl;
         }    
 
+        /// <summary>
+        /// Returns the name of the month based on the month number.
+        /// </summary>
+        /// <param name="number">The number of the month, 1-12</param>
+        /// <returns>The name of the month with the corrisponding number.</returns>
         public string getMonth(int number)
         {
             switch (number)
@@ -180,6 +199,13 @@ namespace MoneyManager
             }
         }
 
+        /// <summary>
+        /// Adds a new transaction to the users transaction list and saves it.
+        /// </summary>
+        /// <param name="amount">Money involed in transaction</param>
+        /// <param name="description">Why was this money spent/ what was it spent on.</param>
+        /// <param name="date">The date when this transaction occured</param>
+        /// <param name="catagory">The subgroup of transactions that this transaction belongs to</param>
         private void addTransaction(double amount, string description, string date, string catagory)
         {
             int id = _idCount;
@@ -221,6 +247,11 @@ namespace MoneyManager
             DataManager.saveTransactionInfo(_userTransactions, _username);
         }
 
+        /// <summary>
+        /// Button click event for a adding a new transaction
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxTransactionAddButton_Click(object sender, EventArgs e)
         {
             
@@ -229,17 +260,25 @@ namespace MoneyManager
             string date = uxDateAddTransaction.Value.ToString();
             string catagory = uxCatagoryPicker.Text;
             addTransaction(amount, description, date, catagory);
-
             updateDisplay();
         }
         
-
+        /// <summary>
+        /// Opens a new SearchForm when clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SearchForm sf = new SearchForm(_username);
             sf.ShowDialog(); //Just want to show, Don't want users adding/removing things after form open.
         }
 
+        /// <summary>
+        /// Button click event for removing a transaction.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxTransactionRemoveButton_Click(object sender, EventArgs e)
         {
             if (uxTransactionsListView.SelectedItems.Count > 0)
@@ -267,15 +306,26 @@ namespace MoneyManager
             }
         }
 
+        /// <summary>
+        /// Opens a login form which the user can use to sign in to use the app.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxLoginToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoginForm lf = new LoginForm();
             if(lf.ShowDialog() == DialogResult.OK)
             {
-                //Add later for testing just use Cody2
+                _username = lf.Username;
             }
+            MessageBox.Show(_username);
         }
 
+        /// <summary>
+        /// An event that checks if the current amount entered is a double.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxAddAmountBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -289,6 +339,11 @@ namespace MoneyManager
             }
         }
 
+        /// <summary>
+        /// Button click event for adding a goal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxAddGoalButton_Click(object sender, EventArgs e)
         {
             double amount = Convert.ToDouble(uxGoalAmountBox.Text);
@@ -336,7 +391,9 @@ namespace MoneyManager
         }
 
         
-
+        /// <summary>
+        /// Displays all the users current goals. This is called by updateDisplay and when goals are add/deleted
+        /// </summary>
         private void updateGoals()
         {
             _userGoals = DataManager.loadGoals(_username); //Reload goals incase other class messed with them.
@@ -353,7 +410,11 @@ namespace MoneyManager
             }
         }
 
-        //Used to check if goal inputs are in correct format
+        /// <summary>
+        /// Checks if all goal information is in the correct format and withen defined rules.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkGoalButton(object sender, EventArgs e)
         {
             try
@@ -385,6 +446,11 @@ namespace MoneyManager
             }
         }
 
+        /// <summary>
+        /// Checks to see if any scheduled transactions need to be taken out when the program is started.
+        /// </summary>
+        /// <param name="test"></param>
+        /// <param name="username"></param>
         private void checkScheduleTransactions(DateTime test,string username)
         {
             string[] info;
@@ -392,27 +458,52 @@ namespace MoneyManager
             {
                 info = _scheduledTransactions[i].Split(',');
                 DateTime dt = Convert.ToDateTime(info[5]);
-                //if(dt <= DateTime.Now)
                 if(dt <= test)
                 {
                     //Take out scheduled
-                    addTransaction(Convert.ToDouble(info[0]), info[2], info[4], info[3]);
+                    addTransaction(Convert.ToDouble(info[1]), info[2], info[4], info[3]);
                     //Now edit scheduled transaction
                     DateTime endDate = Convert.ToDateTime(info[5]);
                     string [] frequency = info[6].Split('/');
-                    DateTime newDate = endDate.AddMonths(Convert.ToInt32(frequency[0]));
-                    string newSaveInfo = info[0] + "," + info[1] + "," + info[2] + "," + info[3] + "," + endDate.ToString() + "," + newDate.ToString() + "," + info[6];
-                    _scheduledTransactions[i] = newSaveInfo;
+                    int f = Convert.ToInt32(frequency[0]);
+                    if (f == 0)
+                    {
+                        List<string> temp = new List<string>();
+                        for (int j = 0; j < _scheduledTransactions.Count; j++)
+                        {
+                            if (j != i)
+                            {
+                                temp.Add(_scheduledTransactions[j]);
+                            }
+                        }
+                        _scheduledTransactions = temp;
+                    }
+                    else
+                    {
+                        DateTime newDate = endDate.AddMonths(f);
+                        string newSaveInfo = info[0] + "," + info[1] + "," + info[2] + "," + info[3] + "," + endDate.ToString() + "," + newDate.ToString() + "," + info[6];
+                        _scheduledTransactions[i] = newSaveInfo;
+                    }
                 }
             }
         }
 
+        /// <summary>
+        /// Opens a new ScheduledTransactionForm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sheduledTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ScheduleTransactionForm stf = new ScheduleTransactionForm(_pathToScheduled,"Cody2");
             stf.Show();
         }
 
+        /// <summary>
+        /// Opens a new GoalsForm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxViewGoalsButton_Click(object sender, EventArgs e)
         {
             GoalsForm gf = new GoalsForm(_pathToGoals,_username);
@@ -421,6 +512,11 @@ namespace MoneyManager
 
         }
 
+        /// <summary>
+        /// Enables/disables remove button depeding on if something is selected or not
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxTransactionsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (uxTransactionsListView.SelectedItems.Count > 0)
@@ -433,6 +529,11 @@ namespace MoneyManager
             }
         }
 
+        /// <summary>
+        /// Opens a new GainLossForm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gainLossToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GainLossForm glf = new GainLossForm(_username);
