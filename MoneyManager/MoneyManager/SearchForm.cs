@@ -12,13 +12,35 @@ namespace MoneyManager
 {
     public partial class SearchForm : Form
     {
+        /// <summary>
+        /// All the users transactions
+        /// </summary>
         List<string> _userTransactions;
+
+        /// <summary>
+        /// Creates a new SearchForm
+        /// </summary>
+        /// <param name="username">The current user of the program</param>
         public SearchForm(string username)
         {
             InitializeComponent();
             _userTransactions = DataManager.getTransactionInfo(username);
+
+            List<string> categories = DataManager.getCategories();
+            for (int i = 0; i < categories.Count; i++)
+            {
+                uxCatagoryPicker.Items.Add(categories[i]);
+            }
         }
 
+        /// <summary>
+        /// Display all the transactions that fit the search criteria
+        /// </summary>
+        /// <param name="id">The transaction id</param>
+        /// <param name="amount">The transaction amount</param>
+        /// <param name="description">The transactions description</param>
+        /// <param name="date">The date of the transaction</param>
+        /// <param name="catagory">The catagory the transaction is in</param>
         public void updateSearchDisplay(int id, double amount, string description, string date, string catagory)
         {
             ListViewItem item = new ListViewItem();
@@ -38,10 +60,15 @@ namespace MoneyManager
             uxSearchListView.Items.Add(item);
         }
 
+        /// <summary>
+        /// Filters transaction based on serch criteria.
+        /// Calls updateSearchDisplay several times.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxSearchButton_Click(object sender, EventArgs e)
         {
             uxSearchListView.Items.Clear();
-            double checkAmount = 0.00;
             string keyword;
             string catagory;
        
@@ -49,14 +76,13 @@ namespace MoneyManager
             {
                 keyword = uxKeywordSearchBox.Text;
             }
-            if (uxCatagorySearchBox.Text.Length > 0)
+            if (uxCatagoryPicker.Text.Length > 0)
             {
-                catagory = uxCatagorySearchBox.Text;
+                catagory = uxCatagoryPicker.Text;
             }
 
             DateTime dt1 = uxStartDateSearch.Value;
             DateTime dt2 = uxEndDateSearch.Value;
-            //Check in date value changed event if date 2 is after date 1
 
             for (int i = 0; i < _userTransactions.Count; i++)
             {
@@ -77,9 +103,9 @@ namespace MoneyManager
                     }
                 }
 
-                if (uxCatagorySearchBox.Text.Length > 0)
+                if (uxCatagoryPicker.Text.Length > 0)
                 {
-                    if (!info[4].Contains(uxCatagorySearchBox.Text))
+                    if (!info[4].Contains(uxCatagoryPicker.Text))
                     {
                         addResult = false;
                     }
@@ -96,11 +122,16 @@ namespace MoneyManager
                         updateSearchDisplay(Convert.ToInt32(info[0]), Convert.ToDouble(info[1]), info[2], info[3], info[4]);
                     }
                 }
-
-                //updateSearchDisplay(Convert.ToInt32(info[0]), Convert.ToDouble(info[1]), info[2], info[3], info[4]);
             }
         }
 
+        /// <summary>
+        /// Check if transaction date is between start date and end date
+        /// </summary>
+        /// <param name="dt1">Start date</param>
+        /// <param name="dt2">End date</param>
+        /// <param name="info">Single transaction information</param>
+        /// <returns></returns>
         private bool CheckDates(DateTime dt1, DateTime dt2, string [] info)
         {
             DateTime dt = Convert.ToDateTime(info[3]);
@@ -111,6 +142,10 @@ namespace MoneyManager
             return false;
         }
 
+        /// <summary>
+        /// Checks if the amount is below,above,the same, or withen a range depending on selected criteria.
+        /// </summary>
+        /// <param name="info">The transaction information</param>
         private void amountCheck(string [] info)
         {
 
@@ -147,6 +182,11 @@ namespace MoneyManager
                 }
         }
 
+        /// <summary>
+        /// Checks to make sure the start date is before the end date.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxStartDateSearch_ValueChanged(object sender, EventArgs e)
         {
             if(uxStartDateSearch.Value < uxEndDateSearch.Value)
@@ -183,7 +223,12 @@ namespace MoneyManager
             }
         }
 
-        private void uxBelowRadioButton_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Enable range box if rangeRadioButton is checked and disable if another radio button is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uxRangeRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (uxRangeRadioButton.Checked)
             {
@@ -195,6 +240,11 @@ namespace MoneyManager
             }
         }
 
+        /// <summary>
+        /// Enables date selection if the user wants to use dates as criteria.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxUseDatesBox_CheckedChanged(object sender, EventArgs e)
         {
             if (uxUseDatesBox.Checked)

@@ -1,6 +1,6 @@
-﻿Bill
+﻿Paid
 Car/Gas
-Paid
+Bill
 Clothes
 Online
 Food

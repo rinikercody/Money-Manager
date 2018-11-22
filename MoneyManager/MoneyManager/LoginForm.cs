@@ -55,17 +55,18 @@ namespace MoneyManager
             string sql = "SELECT * FROM USERS WHERE username ='" + username + "' AND password = '" + password + "';";
             SQLiteCommand sqlCommand = new SQLiteCommand(sql, _db);
             SQLiteDataReader results = sqlCommand.ExecuteReader();
-            if(results.Read())
+            if (results.Read())
             {
-                MessageBox.Show(results.GetString(0));
                 Username = results.GetString(0);
                 Password = results.GetString(1);
                 _db.Close();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            MessageBox.Show("Incorrect username and password.");
-
+            else
+            {
+                MessageBox.Show("Incorrect username and password.");
+            }
             
         }
 
@@ -76,27 +77,72 @@ namespace MoneyManager
         /// <param name="e"></param>
         private void uxSignUpButton_Click(object sender, EventArgs e)
         {
-            //NEED TO GET WORKING
             //Create users in text file database
-            string username = uxLoginUsernameBox.Text;
-            string password = uxLoginPasswordBox.Text;
-            string sql = "SELECT * FROM USERS WHERE username = '" + username + "';";
-            SQLiteCommand sqlCommand = new SQLiteCommand(sql, _db);
-            SQLiteDataReader results = sqlCommand.ExecuteReader();
-            if (results.Read())
-            {
-                MessageBox.Show("Username is already taken.");
+            string username = uxSignUpNameBox.Text;
+            string password = uxSignUpPasswordBox.Text;
+
+
+            if (username.Length > 2) {
+                if (checkPasswordReqirements(password))
+                {
+                    string sql = "SELECT * FROM USERS WHERE username = '" + username + "';";
+                    SQLiteCommand sqlCommand = new SQLiteCommand(sql, _db);
+                    SQLiteDataReader results = sqlCommand.ExecuteReader();
+                    if (results.Read())
+                    {
+                        MessageBox.Show("Username is already taken.");
+                    }
+                    else
+                    {
+
+                        sql = "INSERT INTO USERS VALUES('" + username + "','" + password + "');";
+                        sqlCommand = new SQLiteCommand(sql, _db);
+                        sqlCommand.ExecuteNonQuery();
+
+                        Username = username;
+                        Password = password;
+                        _db.Close();
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid password. \nPassword must be at least 7 characters long and contain at least 1 uppercase letters.\nThe only other characters that are allowed are ! @ # $ ?");
+                }
             }
             else
             {
-                sql = "INSERT INTO USERS VALUES('" + username + "','" + password + "');";
-                Username = username;
-                Password = password;
-                _db.Close();
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                MessageBox.Show("Username must be at least 3 characters long.");
             }
-            
+        }
+
+      
+
+        private bool checkPasswordReqirements(string password)
+        {
+            bool check = false;
+            if (password.Length > 6) check = true;
+            else return false;
+
+            check = false;
+            for(int i = 0; i < password.Length; i++)
+            {
+                if (char.IsUpper(password[i])) check = true;
+            }
+            if (check == false) return false;
+
+            check = true;
+            char[] badSymbols = { '%', '^', '&', '*', '(', ')', '<', '>', '~', '"', '\'', '\t', '\n' };
+            for(int i = 0; i < password.Length; i++)
+            {
+                for(int j = 0; j < badSymbols.Length; j++)
+                {
+                    if (password[i] == badSymbols[j]) return false;
+                }
+            }
+
+            return true;
         }
     }
 }

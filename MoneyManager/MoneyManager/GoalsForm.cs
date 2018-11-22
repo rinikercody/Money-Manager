@@ -21,9 +21,8 @@ namespace MoneyManager
         /// <summary>
         /// Create a new GoalsForm
         /// </summary>
-        /// <param name="pathToGoals">The path to where the users goals are stored</param>
         /// <param name="username">The current user</param>
-        public GoalsForm(string pathToGoals, string username)
+        public GoalsForm(string username)
         {
             InitializeComponent();
             _userGoals = DataManager.loadGoals(username); //Get users goals.
@@ -67,6 +66,34 @@ namespace MoneyManager
 
         }
 
+        private void checkGoal(object sender, EventArgs e)
+        {
+            try
+            {
+                Convert.ToDouble(uxGoalAmountBox.Text);
+                if(uxGoalDescriptionBox.Text.Length > 0)
+                {
+                    TimeSpan ts = new TimeSpan(6, 0, 0, 0); //A little less than a week
+                    if (uxGoalDate.Value > DateTime.Now + ts)
+                    {
+                        uxAddGoalButton.Enabled = true;
+                    }
+                    else
+                    {
+                        uxAddGoalButton.Enabled = false;
+                    }
+                }
+                else
+                {
+                    uxAddGoalButton.Enabled = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                uxAddGoalButton.Enabled = false;
+            }
+        }
+
         /// <summary>
         /// Add a new goal to the users current goal list
         /// </summary>
@@ -76,9 +103,51 @@ namespace MoneyManager
         {
             double amount = Convert.ToDouble(uxGoalAmountBox.Text);
             string description = uxGoalDescriptionBox.Text;
-            string date = uxGoalDate.Value.ToString();
-            _userGoals.Add(amount + "," + description + "," + date);
+            //string date = uxGoalDate.Value.ToString();
+            //_userGoals.Add(amount + "," + description + "," + date);
+            //DataManager.saveGoals(_userGoals, _username);
+
+
+
+            DateTime goalDate = uxGoalDate.Value;
+            string saveInfo = amount + "," + description + "," + goalDate.ToString();
+
+
+            if (_userGoals.Count == 0)
+            {
+                _userGoals.Add(saveInfo);
+            }
+            else if (goalDate >= Convert.ToDateTime(_userGoals[_userGoals.Count - 1].Split(',')[2]))
+            {
+                _userGoals.Add(saveInfo);
+            }
+            else
+            {
+                List<string> temp = new List<string>();
+                for (int i = 0; i < _userGoals.Count; i++)
+                {
+                    DateTime date = Convert.ToDateTime(_userGoals[i].Split(',')[2]);
+
+                    if (goalDate < date)
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            temp.Add(_userGoals[j]);
+                        }
+
+                        temp.Add(saveInfo);
+
+                        for (int j = i; j < _userGoals.Count; j++)
+                        {
+                            temp.Add(_userGoals[j]);
+                        }
+                        break;
+                    }
+                }
+                _userGoals = temp;
+            }
             DataManager.saveGoals(_userGoals, _username);
+            updateDisplay();
         }
 
         /// <summary>

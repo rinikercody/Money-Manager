@@ -100,6 +100,7 @@
             this.uxGoalDate.Name = "uxGoalDate";
             this.uxGoalDate.Size = new System.Drawing.Size(234, 22);
             this.uxGoalDate.TabIndex = 34;
+            this.uxGoalDate.ValueChanged += new System.EventHandler(this.checkGoal);
             // 
             // label1
             // 
@@ -125,6 +126,7 @@
             this.uxGoalDescriptionBox.Name = "uxGoalDescriptionBox";
             this.uxGoalDescriptionBox.Size = new System.Drawing.Size(440, 22);
             this.uxGoalDescriptionBox.TabIndex = 31;
+            this.uxGoalDescriptionBox.TextChanged += new System.EventHandler(this.checkGoal);
             // 
             // uxGoalAmountBox
             // 
@@ -132,6 +134,7 @@
             this.uxGoalAmountBox.Name = "uxGoalAmountBox";
             this.uxGoalAmountBox.Size = new System.Drawing.Size(100, 22);
             this.uxGoalAmountBox.TabIndex = 30;
+            this.uxGoalAmountBox.TextChanged += new System.EventHandler(this.checkGoal);
             // 
             // uxRemoveGoalButton
             // 
@@ -148,6 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 671);
             this.Controls.Add(this.uxRemoveGoalButton);
             this.Controls.Add(this.uxGoalDateLabel);
@@ -158,6 +162,7 @@
             this.Controls.Add(this.uxGoalDescriptionBox);
             this.Controls.Add(this.uxGoalAmountBox);
             this.Controls.Add(this.uxGoalsListView);
+            this.MaximizeBox = false;
             this.Name = "GoalsForm";
             this.Text = "GoalsForm";
             this.Load += new System.EventHandler(this.GoalsForm_Load);

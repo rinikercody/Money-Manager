@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.uxMainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.uxSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gainLossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxLoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sheduledTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uxCalenderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxTransactionsListView = new System.Windows.Forms.ListView();
             this.AmountColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -67,6 +69,8 @@
             this.NetLabel = new System.Windows.Forms.Label();
             this.uxNetAmountLabel = new System.Windows.Forms.Label();
             this.uxViewGoalsButton = new System.Windows.Forms.Button();
+            this.uxCurrentTimeLabel = new System.Windows.Forms.Label();
+            this.uxClockTimer = new System.Windows.Forms.Timer(this.components);
             this.uxMainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +81,8 @@
             this.uxSearchToolStripMenuItem,
             this.gainLossToolStripMenuItem,
             this.uxLoginToolStripMenuItem,
-            this.sheduledTransactionsToolStripMenuItem});
+            this.sheduledTransactionsToolStripMenuItem,
+            this.uxCalenderToolStripMenuItem});
             this.uxMainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.uxMainMenuStrip.Name = "uxMainMenuStrip";
             this.uxMainMenuStrip.Size = new System.Drawing.Size(1226, 28);
@@ -111,6 +116,13 @@
             this.sheduledTransactionsToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
             this.sheduledTransactionsToolStripMenuItem.Text = "Sheduled Transactions";
             this.sheduledTransactionsToolStripMenuItem.Click += new System.EventHandler(this.sheduledTransactionsToolStripMenuItem_Click);
+            // 
+            // uxCalenderToolStripMenuItem
+            // 
+            this.uxCalenderToolStripMenuItem.Name = "uxCalenderToolStripMenuItem";
+            this.uxCalenderToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
+            this.uxCalenderToolStripMenuItem.Text = "Calender";
+            this.uxCalenderToolStripMenuItem.Click += new System.EventHandler(this.uxCalenderToolStripMenuItem_Click);
             // 
             // uxTransactionsListView
             // 
@@ -208,6 +220,7 @@
             // 
             // uxTransactionAddButton
             // 
+            this.uxTransactionAddButton.Enabled = false;
             this.uxTransactionAddButton.Location = new System.Drawing.Point(410, 648);
             this.uxTransactionAddButton.Name = "uxTransactionAddButton";
             this.uxTransactionAddButton.Size = new System.Drawing.Size(170, 23);
@@ -264,7 +277,7 @@
             // 
             // uxGoalAmountBox
             // 
-            this.uxGoalAmountBox.Location = new System.Drawing.Point(958, 581);
+            this.uxGoalAmountBox.Location = new System.Drawing.Point(971, 581);
             this.uxGoalAmountBox.Name = "uxGoalAmountBox";
             this.uxGoalAmountBox.Size = new System.Drawing.Size(100, 22);
             this.uxGoalAmountBox.TabIndex = 10;
@@ -420,11 +433,26 @@
             this.uxViewGoalsButton.UseVisualStyleBackColor = true;
             this.uxViewGoalsButton.Click += new System.EventHandler(this.uxViewGoalsButton_Click);
             // 
+            // uxCurrentTimeLabel
+            // 
+            this.uxCurrentTimeLabel.AutoSize = true;
+            this.uxCurrentTimeLabel.Location = new System.Drawing.Point(862, 64);
+            this.uxCurrentTimeLabel.Name = "uxCurrentTimeLabel";
+            this.uxCurrentTimeLabel.Size = new System.Drawing.Size(46, 17);
+            this.uxCurrentTimeLabel.TabIndex = 34;
+            this.uxCurrentTimeLabel.Text = "label3";
+            // 
+            // uxClockTimer
+            // 
+            this.uxClockTimer.Tick += new System.EventHandler(this.uxClockTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(1226, 722);
+            this.Controls.Add(this.uxCurrentTimeLabel);
             this.Controls.Add(this.uxViewGoalsButton);
             this.Controls.Add(this.uxNetAmountLabel);
             this.Controls.Add(this.NetLabel);
@@ -455,7 +483,9 @@
             this.Controls.Add(this.uxTransactionLabel);
             this.Controls.Add(this.uxTransactionsListView);
             this.Controls.Add(this.uxMainMenuStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.uxMainMenuStrip;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.uxMainMenuStrip.ResumeLayout(false);
@@ -506,6 +536,9 @@
         private System.Windows.Forms.Label uxNetAmountLabel;
         private System.Windows.Forms.ToolStripMenuItem sheduledTransactionsToolStripMenuItem;
         private System.Windows.Forms.Button uxViewGoalsButton;
+        private System.Windows.Forms.Label uxCurrentTimeLabel;
+        private System.Windows.Forms.Timer uxClockTimer;
+        private System.Windows.Forms.ToolStripMenuItem uxCalenderToolStripMenuItem;
     }
 }
 

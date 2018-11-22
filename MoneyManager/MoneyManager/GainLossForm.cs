@@ -94,6 +94,11 @@ namespace MoneyManager
             uxNetAmountLabel.Text = totalNet.ToString("c");
         }
 
+        /// <summary>
+        /// Calculates a simple gain loss for the category.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         public double[] getGainLoss(string category)
         {
             double[] gl = new double[2];
@@ -151,6 +156,11 @@ namespace MoneyManager
             return gl;
         }
 
+        /// <summary>
+        /// Update display when user changes the date values
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxUseDatesBox_CheckedChanged(object sender, EventArgs e)
         {
             updateDisplay();

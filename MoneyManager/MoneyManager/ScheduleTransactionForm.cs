@@ -13,9 +13,6 @@ namespace MoneyManager
 {
     public partial class ScheduleTransactionForm : Form
     {
-        //Where all the users scheduled Transactions are stored
-        private string _pathToScheduledTransactions;
-
         //The current user
         private string _username;
 
@@ -28,12 +25,10 @@ namespace MoneyManager
         /// <summary>
         /// Creates a new ScheduledTransactionForm
         /// </summary>
-        /// <param name="pathToScheduledTransactions">The location where the scheduled transaction info is stored</param>
         /// <param name="username">The current user</param>
-        public ScheduleTransactionForm(string pathToScheduledTransactions, string username)
+        public ScheduleTransactionForm(string username)
         {
             InitializeComponent();
-            _pathToScheduledTransactions = pathToScheduledTransactions;
             _scheduledTransactions = DataManager.getScheduledTransactions(username);
             _username = username;
 
@@ -75,7 +70,13 @@ namespace MoneyManager
                 ListViewItem item = new ListViewItem();
                 item.Text = ("1");
                 item.SubItems.Add(amount.ToString());
-                item.SubItems.Add(startDate.ToString());
+                if (Convert.ToDateTime(info[4]) != Convert.ToDateTime(newDate))
+                {
+                    item.SubItems.Add(startDate.ToString());
+                }
+                else {
+                    item.SubItems.Add("");
+                }
                 item.SubItems.Add(newDate.ToString());
                 item.SubItems.Add(description.ToString());
                 item.SubItems.Add(frequency);
@@ -89,7 +90,7 @@ namespace MoneyManager
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
+        private void removeButton_Click(object sender, EventArgs e)
         {
             if (uxScheduledTransactionListView.SelectedItems.Count > 0)
             {
@@ -154,7 +155,7 @@ namespace MoneyManager
             }
             else
             {
-                result = "0";
+                result = "0/0";
             }
             return result;
         }
@@ -175,9 +176,62 @@ namespace MoneyManager
             if (uxFrequencyWeeks.Text.Length > 0)
             {
                 int weeks = Convert.ToInt32(uxFrequencyWeeks.Text);
-                newDate = newDate.AddDays(7);
+                newDate = newDate.AddDays(7 * weeks);
             }
             return newDate;
+        }
+
+        private void checkAdd(object sender, EventArgs e)
+        {
+            try
+            {
+                Convert.ToDouble(uxAmountBox.Text);
+                if(uxDescriptionBox.Text.Length > 0)
+                {
+                    if (uxOneTimeCheckBox.Checked)
+                    {
+                        uxFrequencyWeeks.Text = "";
+                        uxFrequencyMonths.Text = "";
+                        uxFrequencyWeeks.Enabled = false;
+                        uxFrequencyMonths.Enabled = false;
+                        uxAddScheduledTransaction.Enabled = true;
+                    }
+                    else
+                    {
+                        uxFrequencyWeeks.Enabled = true;
+                        uxFrequencyMonths.Enabled = true;
+                        try
+                        {
+                            if (uxFrequencyWeeks.Text.Length > 0)
+                            {
+                                Convert.ToDouble(uxFrequencyWeeks.Text);
+                                uxAddScheduledTransaction.Enabled = true;
+                            }
+                            else if (uxFrequencyMonths.Text.Length > 0)
+                            {
+                                Convert.ToDouble(uxFrequencyMonths.Text);
+                                uxAddScheduledTransaction.Enabled = true;
+                            }
+                            else
+                            {
+                                uxAddScheduledTransaction.Enabled = false;
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+                            uxAddScheduledTransaction.Enabled = false;
+                        }
+                    }
+                }
+                else
+                {
+                    uxAddScheduledTransaction.Enabled = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                uxAddScheduledTransaction.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -238,16 +292,18 @@ namespace MoneyManager
         {
             if (uxOneTimeCheckBox.Checked)
             {
-                uxFrequencyMonths.Enabled = false;
-                uxFrequencyWeeks.Enabled = false;
+                //uxFrequencyMonths.Enabled = false;
+                //uxFrequencyWeeks.Enabled = false;
+                uxFrequencyMonths.Text = "";
+                uxFrequencyWeeks.Text = "";
                 try
                 {
                     Convert.ToInt32(uxAmountBox.Text);
-                    uxAddScheduledTransaction.Enabled = true;
+                    //uxAddScheduledTransaction.Enabled = true;
                 }
                 catch(Exception ex)
                 {
-                    uxAddScheduledTransaction.Enabled = false;
+                    //uxAddScheduledTransaction.Enabled = false;
                 }
             }
             else

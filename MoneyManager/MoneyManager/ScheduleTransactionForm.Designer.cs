@@ -69,7 +69,7 @@
             this.uxAmountBox.Name = "uxAmountBox";
             this.uxAmountBox.Size = new System.Drawing.Size(353, 22);
             this.uxAmountBox.TabIndex = 1;
-            this.uxAmountBox.TextChanged += new System.EventHandler(this.uxFrequencyWeeks_TextChanged);
+            this.uxAmountBox.TextChanged += new System.EventHandler(this.checkAdd);
             // 
             // uxCategoryPicker
             // 
@@ -95,6 +95,7 @@
             this.uxStartDate.Name = "uxStartDate";
             this.uxStartDate.Size = new System.Drawing.Size(353, 22);
             this.uxStartDate.TabIndex = 29;
+            this.uxStartDate.ValueChanged += new System.EventHandler(this.checkAdd);
             // 
             // label3
             // 
@@ -131,6 +132,7 @@
             this.uxDescriptionBox.Name = "uxDescriptionBox";
             this.uxDescriptionBox.Size = new System.Drawing.Size(353, 22);
             this.uxDescriptionBox.TabIndex = 40;
+            this.uxDescriptionBox.TextChanged += new System.EventHandler(this.checkAdd);
             // 
             // uxScheduledTransactionListView
             // 
@@ -180,13 +182,14 @@
             // 
             // uxRemoveTransactionButton
             // 
+            this.uxRemoveTransactionButton.Enabled = false;
             this.uxRemoveTransactionButton.Location = new System.Drawing.Point(11, 377);
             this.uxRemoveTransactionButton.Name = "uxRemoveTransactionButton";
             this.uxRemoveTransactionButton.Size = new System.Drawing.Size(443, 61);
             this.uxRemoveTransactionButton.TabIndex = 42;
             this.uxRemoveTransactionButton.Text = "Remove Transaction";
             this.uxRemoveTransactionButton.UseVisualStyleBackColor = true;
-            this.uxRemoveTransactionButton.Click += new System.EventHandler(this.button2_Click);
+            this.uxRemoveTransactionButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // label9
             // 
@@ -221,7 +224,7 @@
             this.uxFrequencyMonths.Name = "uxFrequencyMonths";
             this.uxFrequencyMonths.Size = new System.Drawing.Size(100, 22);
             this.uxFrequencyMonths.TabIndex = 46;
-            this.uxFrequencyMonths.TextChanged += new System.EventHandler(this.uxFrequencyWeeks_TextChanged);
+            this.uxFrequencyMonths.TextChanged += new System.EventHandler(this.checkAdd);
             // 
             // uxFrequencyWeeks
             // 
@@ -229,7 +232,7 @@
             this.uxFrequencyWeeks.Name = "uxFrequencyWeeks";
             this.uxFrequencyWeeks.Size = new System.Drawing.Size(100, 22);
             this.uxFrequencyWeeks.TabIndex = 47;
-            this.uxFrequencyWeeks.TextChanged += new System.EventHandler(this.uxFrequencyWeeks_TextChanged);
+            this.uxFrequencyWeeks.TextChanged += new System.EventHandler(this.checkAdd);
             // 
             // label6
             // 
@@ -249,12 +252,13 @@
             this.uxOneTimeCheckBox.TabIndex = 49;
             this.uxOneTimeCheckBox.Text = "One Time";
             this.uxOneTimeCheckBox.UseVisualStyleBackColor = true;
-            this.uxOneTimeCheckBox.CheckedChanged += new System.EventHandler(this.uxOneTimeCheckBox_CheckedChanged);
+            this.uxOneTimeCheckBox.CheckedChanged += new System.EventHandler(this.checkAdd);
             // 
             // ScheduleTransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(1415, 450);
             this.Controls.Add(this.uxOneTimeCheckBox);
             this.Controls.Add(this.label6);
@@ -274,6 +278,7 @@
             this.Controls.Add(this.uxCategoryPicker);
             this.Controls.Add(this.uxAmountBox);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "ScheduleTransactionForm";
             this.Text = "Scheduled Transactions";
             this.ResumeLayout(false);

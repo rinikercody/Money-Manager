@@ -32,8 +32,8 @@
             this.uxLoginLabel = new System.Windows.Forms.Label();
             this.uxSignUpLabel = new System.Windows.Forms.Label();
             this.uxLoginPasswordBox = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.uxSignUpNameBox = new System.Windows.Forms.TextBox();
+            this.uxSignUpPasswordBox = new System.Windows.Forms.TextBox();
             this.uxLoginUserNameLabel = new System.Windows.Forms.Label();
             this.uxLoginPasswordLabel = new System.Windows.Forms.Label();
             this.uxSignUpUsernameLabel = new System.Windows.Forms.Label();
@@ -44,6 +44,7 @@
             // 
             // uxLoginUsernameBox
             // 
+            this.uxLoginUsernameBox.BackColor = System.Drawing.SystemColors.Window;
             this.uxLoginUsernameBox.Location = new System.Drawing.Point(110, 35);
             this.uxLoginUsernameBox.Name = "uxLoginUsernameBox";
             this.uxLoginUsernameBox.Size = new System.Drawing.Size(269, 22);
@@ -74,19 +75,20 @@
             this.uxLoginPasswordBox.Size = new System.Drawing.Size(269, 22);
             this.uxLoginPasswordBox.TabIndex = 3;
             // 
-            // textBox3
+            // uxSignUpNameBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(110, 164);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(269, 22);
-            this.textBox3.TabIndex = 4;
+            this.uxSignUpNameBox.Location = new System.Drawing.Point(110, 164);
+            this.uxSignUpNameBox.Name = "uxSignUpNameBox";
+            this.uxSignUpNameBox.Size = new System.Drawing.Size(269, 22);
+            this.uxSignUpNameBox.TabIndex = 4;
             // 
-            // textBox4
+            // uxSignUpPasswordBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(110, 192);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(269, 22);
-            this.textBox4.TabIndex = 5;
+            this.uxSignUpPasswordBox.Location = new System.Drawing.Point(110, 192);
+            this.uxSignUpPasswordBox.Name = "uxSignUpPasswordBox";
+            this.uxSignUpPasswordBox.PasswordChar = '*';
+            this.uxSignUpPasswordBox.Size = new System.Drawing.Size(269, 22);
+            this.uxSignUpPasswordBox.TabIndex = 5;
             // 
             // uxLoginUserNameLabel
             // 
@@ -148,6 +150,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(467, 274);
             this.Controls.Add(this.uxSignUpButton);
             this.Controls.Add(this.uxLoginButton);
@@ -155,12 +158,14 @@
             this.Controls.Add(this.uxSignUpUsernameLabel);
             this.Controls.Add(this.uxLoginPasswordLabel);
             this.Controls.Add(this.uxLoginUserNameLabel);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.uxSignUpPasswordBox);
+            this.Controls.Add(this.uxSignUpNameBox);
             this.Controls.Add(this.uxLoginPasswordBox);
             this.Controls.Add(this.uxSignUpLabel);
             this.Controls.Add(this.uxLoginLabel);
             this.Controls.Add(this.uxLoginUsernameBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.Text = "LoginForm";
             this.ResumeLayout(false);
@@ -174,8 +179,8 @@
         private System.Windows.Forms.Label uxLoginLabel;
         private System.Windows.Forms.Label uxSignUpLabel;
         private System.Windows.Forms.TextBox uxLoginPasswordBox;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox uxSignUpNameBox;
+        private System.Windows.Forms.TextBox uxSignUpPasswordBox;
         private System.Windows.Forms.Label uxLoginUserNameLabel;
         private System.Windows.Forms.Label uxLoginPasswordLabel;
         private System.Windows.Forms.Label uxSignUpUsernameLabel;
