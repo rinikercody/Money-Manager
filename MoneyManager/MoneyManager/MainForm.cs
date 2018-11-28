@@ -37,6 +37,7 @@ namespace MoneyManager
                 _username = username;
                 uxClockTimer.Interval = 1000;
                 uxClockTimer.Start();
+                uxCurrentTimeLabel.Text = "Today: ";
 
                 _userGoals = DataManager.loadGoals(_username); //Get Goals
                 _userTransactions = DataManager.getTransactionInfo(_username); //Get Transactions
@@ -107,7 +108,8 @@ namespace MoneyManager
                 ListViewItem item = new ListViewItem();
                 double amount = Convert.ToDouble(info[1]);
                 item.Text = amount.ToString("c"); //First column of list view is set to amount
-                item.SubItems.Add(info[3]); //Date
+                DateTime temp = Convert.ToDateTime(info[3]);
+                item.SubItems.Add(temp.ToString("MM/dd/yyyy")); //Date
                 item.SubItems.Add(info[2]); //Description
                 item.SubItems.Add(info[4]); //Catagory
                 item.SubItems.Add(info[0]); //Id
@@ -117,9 +119,10 @@ namespace MoneyManager
 
                 uxTransactionsListView.Items.Add(item); //Add the transaction information to the listview.
             }
-
+           
             //Update everything else on the display
-            uxMonthLabel.Text = getMonth(DateTime.Now.Month);
+            
+            uxUserLabel.Text = "Signed in: " + _username;
 
             DateTime dt1 = new DateTime(2018, 10, 1, 13, 30, 52); //year,month,day,hour,min,sec
             DateTime dt2 = new DateTime(2018, 11, 8, 13, 30, 52); 
@@ -302,12 +305,12 @@ namespace MoneyManager
         /// <param name="username">The current user</param>
         private void checkScheduleTransactions(DateTime currentDate, string username)
         {
-            //ONLY TAKING ONE AT A TIME OUT
+           
             string[] info;
-
-            for (int i = 0; i < _scheduledTransactions.Count; i++)
+            int i = 0;
+            int limit = _scheduledTransactions.Count;
+            for (i = 0; i < limit; i++)
             {
-                
                 info = _scheduledTransactions[i].Split(',');
                 DateTime dt = Convert.ToDateTime(info[5]);
                 if (dt <= currentDate)
@@ -317,12 +320,14 @@ namespace MoneyManager
                     //Now edit scheduled transaction
                     DateTime endDate = Convert.ToDateTime(info[5]);
                     string[] frequency = info[6].Split('/');
+                    //MessageBox.Show(frequency[0]);
                     int f = Convert.ToInt32(frequency[0]);
                     int f2 = Convert.ToInt32(frequency[1]);
+
                     if (f == 0 && f2 == 0)
                     {
                         List<string> temp = new List<string>();
-                        for (int j = 0; j < _scheduledTransactions.Count; j++)
+                        for (int j = 0; j < limit; j++)
                         {
                             if (j != i)
                             {
@@ -338,10 +343,12 @@ namespace MoneyManager
                         string newSaveInfo = info[0] + "," + info[1] + "," + info[2] + "," + info[3] + "," + endDate.ToString("MM/dd/yyyy") + "," + newDate.ToString() + "," + info[6];
                         _scheduledTransactions[i] = newSaveInfo;
                     }
-                    i = 0; //Resart loop after taking something out
+                    i = -1; //Restart loop after taking something out
+                    limit = _scheduledTransactions.Count;
                 }
                 
             } //End forloop
+            DataManager.saveScheduledTransactions(_scheduledTransactions, _username);
         }
 
 
@@ -595,7 +602,8 @@ namespace MoneyManager
         /// <param name="e"></param>
         private void uxClockTimer_Tick(object sender, EventArgs e)
         {
-            uxCurrentTimeLabel.Text = DateTime.Now.ToString("hh:mm");
+            //uxCurrentTimeLabel.Text = "Today: " + getMonth(DateTime.Now.Month) + " " + DateTime.Now.Day + "," + DateTime.Now.ToString("hh:mm");
+            uxCurrentTimeLabel.Text = "Today: " + getMonth(DateTime.Now.Month) + " " + DateTime.Now.ToString("dd, yyyy Time:  hh:mm");
         }
 
         private void uxCalenderToolStripMenuItem_Click(object sender, EventArgs e)

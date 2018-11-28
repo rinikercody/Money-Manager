@@ -32,9 +32,9 @@
             this.uxMainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.uxSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gainLossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uxLoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sheduledTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxCalenderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uxTransactionsListView = new System.Windows.Forms.ListView();
             this.AmountColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -54,7 +54,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.uxGoalDescriptionBox = new System.Windows.Forms.TextBox();
             this.uxGoalAmountBox = new System.Windows.Forms.TextBox();
-            this.uxMonthLabel = new System.Windows.Forms.Label();
+            this.uxUserLabel = new System.Windows.Forms.Label();
             this.uxLossLabel = new System.Windows.Forms.Label();
             this.uxGainLabel = new System.Windows.Forms.Label();
             this.uxLossAmountLabel = new System.Windows.Forms.Label();
@@ -80,12 +80,12 @@
             this.uxMainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.uxSearchToolStripMenuItem,
             this.gainLossToolStripMenuItem,
-            this.uxLoginToolStripMenuItem,
             this.sheduledTransactionsToolStripMenuItem,
-            this.uxCalenderToolStripMenuItem});
+            this.uxCalenderToolStripMenuItem,
+            this.loginToolStripMenuItem});
             this.uxMainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.uxMainMenuStrip.Name = "uxMainMenuStrip";
-            this.uxMainMenuStrip.Size = new System.Drawing.Size(1226, 28);
+            this.uxMainMenuStrip.Size = new System.Drawing.Size(1314, 28);
             this.uxMainMenuStrip.TabIndex = 0;
             this.uxMainMenuStrip.Text = "menuStrip1";
             // 
@@ -103,13 +103,6 @@
             this.gainLossToolStripMenuItem.Text = "Gain/Loss";
             this.gainLossToolStripMenuItem.Click += new System.EventHandler(this.gainLossToolStripMenuItem_Click);
             // 
-            // uxLoginToolStripMenuItem
-            // 
-            this.uxLoginToolStripMenuItem.Name = "uxLoginToolStripMenuItem";
-            this.uxLoginToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
-            this.uxLoginToolStripMenuItem.Text = "Login";
-            this.uxLoginToolStripMenuItem.Click += new System.EventHandler(this.uxLoginToolStripMenuItem_Click);
-            // 
             // sheduledTransactionsToolStripMenuItem
             // 
             this.sheduledTransactionsToolStripMenuItem.Name = "sheduledTransactionsToolStripMenuItem";
@@ -124,6 +117,13 @@
             this.uxCalenderToolStripMenuItem.Text = "Calender";
             this.uxCalenderToolStripMenuItem.Click += new System.EventHandler(this.uxCalenderToolStripMenuItem_Click);
             // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
+            this.loginToolStripMenuItem.Text = "Login";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.uxLoginToolStripMenuItem_Click);
+            // 
             // uxTransactionsListView
             // 
             this.uxTransactionsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -137,7 +137,7 @@
             this.uxTransactionsListView.Location = new System.Drawing.Point(12, 64);
             this.uxTransactionsListView.MultiSelect = false;
             this.uxTransactionsListView.Name = "uxTransactionsListView";
-            this.uxTransactionsListView.Size = new System.Drawing.Size(842, 509);
+            this.uxTransactionsListView.Size = new System.Drawing.Size(904, 509);
             this.uxTransactionsListView.TabIndex = 1;
             this.uxTransactionsListView.UseCompatibleStateImageBehavior = false;
             this.uxTransactionsListView.View = System.Windows.Forms.View.Details;
@@ -232,7 +232,7 @@
             // uxAddGoalButton
             // 
             this.uxAddGoalButton.Enabled = false;
-            this.uxAddGoalButton.Location = new System.Drawing.Point(1131, 674);
+            this.uxAddGoalButton.Location = new System.Drawing.Point(1211, 693);
             this.uxAddGoalButton.Name = "uxAddGoalButton";
             this.uxAddGoalButton.Size = new System.Drawing.Size(83, 27);
             this.uxAddGoalButton.TabIndex = 15;
@@ -242,7 +242,7 @@
             // 
             // uxGoalDate
             // 
-            this.uxGoalDate.Location = new System.Drawing.Point(855, 675);
+            this.uxGoalDate.Location = new System.Drawing.Point(935, 694);
             this.uxGoalDate.Name = "uxGoalDate";
             this.uxGoalDate.Size = new System.Drawing.Size(246, 22);
             this.uxGoalDate.TabIndex = 14;
@@ -251,7 +251,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(852, 581);
+            this.label1.Location = new System.Drawing.Point(932, 600);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 17);
             this.label1.TabIndex = 13;
@@ -260,7 +260,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(852, 615);
+            this.label2.Location = new System.Drawing.Point(932, 634);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 17);
             this.label2.TabIndex = 12;
@@ -268,7 +268,7 @@
             // 
             // uxGoalDescriptionBox
             // 
-            this.uxGoalDescriptionBox.Location = new System.Drawing.Point(971, 612);
+            this.uxGoalDescriptionBox.Location = new System.Drawing.Point(1051, 631);
             this.uxGoalDescriptionBox.Multiline = true;
             this.uxGoalDescriptionBox.Name = "uxGoalDescriptionBox";
             this.uxGoalDescriptionBox.Size = new System.Drawing.Size(243, 42);
@@ -277,21 +277,21 @@
             // 
             // uxGoalAmountBox
             // 
-            this.uxGoalAmountBox.Location = new System.Drawing.Point(971, 581);
+            this.uxGoalAmountBox.Location = new System.Drawing.Point(1051, 600);
             this.uxGoalAmountBox.Name = "uxGoalAmountBox";
             this.uxGoalAmountBox.Size = new System.Drawing.Size(100, 22);
             this.uxGoalAmountBox.TabIndex = 10;
             this.uxGoalAmountBox.TextChanged += new System.EventHandler(this.checkGoalButton);
             // 
-            // uxMonthLabel
+            // uxUserLabel
             // 
-            this.uxMonthLabel.AutoSize = true;
-            this.uxMonthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxMonthLabel.Location = new System.Drawing.Point(860, 32);
-            this.uxMonthLabel.Name = "uxMonthLabel";
-            this.uxMonthLabel.Size = new System.Drawing.Size(79, 29);
-            this.uxMonthLabel.TabIndex = 16;
-            this.uxMonthLabel.Text = "Month";
+            this.uxUserLabel.AutoSize = true;
+            this.uxUserLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxUserLabel.Location = new System.Drawing.Point(922, 32);
+            this.uxUserLabel.Name = "uxUserLabel";
+            this.uxUserLabel.Size = new System.Drawing.Size(64, 29);
+            this.uxUserLabel.TabIndex = 16;
+            this.uxUserLabel.Text = "User";
             // 
             // uxLossLabel
             // 
@@ -341,7 +341,7 @@
             // 
             this.uxGoalsHeadingLabel.AutoSize = true;
             this.uxGoalsHeadingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxGoalsHeadingLabel.Location = new System.Drawing.Point(860, 131);
+            this.uxGoalsHeadingLabel.Location = new System.Drawing.Point(922, 116);
             this.uxGoalsHeadingLabel.Name = "uxGoalsHeadingLabel";
             this.uxGoalsHeadingLabel.Size = new System.Drawing.Size(63, 25);
             this.uxGoalsHeadingLabel.TabIndex = 21;
@@ -350,7 +350,7 @@
             // uxGoalsLabel
             // 
             this.uxGoalsLabel.AutoSize = true;
-            this.uxGoalsLabel.Location = new System.Drawing.Point(876, 162);
+            this.uxGoalsLabel.Location = new System.Drawing.Point(938, 147);
             this.uxGoalsLabel.Name = "uxGoalsLabel";
             this.uxGoalsLabel.Size = new System.Drawing.Size(43, 17);
             this.uxGoalsLabel.TabIndex = 22;
@@ -397,7 +397,7 @@
             // uxGoalDateLabel
             // 
             this.uxGoalDateLabel.AutoSize = true;
-            this.uxGoalDateLabel.Location = new System.Drawing.Point(852, 650);
+            this.uxGoalDateLabel.Location = new System.Drawing.Point(932, 669);
             this.uxGoalDateLabel.Name = "uxGoalDateLabel";
             this.uxGoalDateLabel.Size = new System.Drawing.Size(72, 17);
             this.uxGoalDateLabel.TabIndex = 29;
@@ -425,7 +425,7 @@
             // 
             // uxViewGoalsButton
             // 
-            this.uxViewGoalsButton.Location = new System.Drawing.Point(861, 549);
+            this.uxViewGoalsButton.Location = new System.Drawing.Point(941, 568);
             this.uxViewGoalsButton.Name = "uxViewGoalsButton";
             this.uxViewGoalsButton.Size = new System.Drawing.Size(353, 23);
             this.uxViewGoalsButton.TabIndex = 32;
@@ -436,11 +436,12 @@
             // uxCurrentTimeLabel
             // 
             this.uxCurrentTimeLabel.AutoSize = true;
-            this.uxCurrentTimeLabel.Location = new System.Drawing.Point(862, 64);
+            this.uxCurrentTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCurrentTimeLabel.Location = new System.Drawing.Point(932, 73);
             this.uxCurrentTimeLabel.Name = "uxCurrentTimeLabel";
-            this.uxCurrentTimeLabel.Size = new System.Drawing.Size(46, 17);
+            this.uxCurrentTimeLabel.Size = new System.Drawing.Size(41, 18);
             this.uxCurrentTimeLabel.TabIndex = 34;
-            this.uxCurrentTimeLabel.Text = "label3";
+            this.uxCurrentTimeLabel.Text = "Time";
             // 
             // uxClockTimer
             // 
@@ -451,7 +452,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.ClientSize = new System.Drawing.Size(1226, 722);
+            this.ClientSize = new System.Drawing.Size(1314, 722);
             this.Controls.Add(this.uxCurrentTimeLabel);
             this.Controls.Add(this.uxViewGoalsButton);
             this.Controls.Add(this.uxNetAmountLabel);
@@ -467,7 +468,7 @@
             this.Controls.Add(this.uxLossAmountLabel);
             this.Controls.Add(this.uxGainLabel);
             this.Controls.Add(this.uxLossLabel);
-            this.Controls.Add(this.uxMonthLabel);
+            this.Controls.Add(this.uxUserLabel);
             this.Controls.Add(this.uxAddGoalButton);
             this.Controls.Add(this.uxGoalDate);
             this.Controls.Add(this.label1);
@@ -487,7 +488,7 @@
             this.MainMenuStrip = this.uxMainMenuStrip;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Money Manager";
             this.uxMainMenuStrip.ResumeLayout(false);
             this.uxMainMenuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -517,8 +518,7 @@
         private System.Windows.Forms.TextBox uxGoalDescriptionBox;
         private System.Windows.Forms.TextBox uxGoalAmountBox;
         private System.Windows.Forms.ToolStripMenuItem gainLossToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem uxLoginToolStripMenuItem;
-        private System.Windows.Forms.Label uxMonthLabel;
+        private System.Windows.Forms.Label uxUserLabel;
         private System.Windows.Forms.Label uxLossLabel;
         private System.Windows.Forms.Label uxGainLabel;
         private System.Windows.Forms.Label uxLossAmountLabel;
@@ -539,6 +539,7 @@
         private System.Windows.Forms.Label uxCurrentTimeLabel;
         private System.Windows.Forms.Timer uxClockTimer;
         private System.Windows.Forms.ToolStripMenuItem uxCalenderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
     }
 }
 

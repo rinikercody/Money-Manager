@@ -12,19 +12,56 @@ namespace MoneyManager
 {
     public partial class CalenderForm : Form
     {
+        /// <summary>
+        /// List of users transactions
+        /// </summary>
         private List<string> _userTransactions;
+
+        /// <summary>
+        /// List of users goals
+        /// </summary>
         private List<string> _userGoals;
+
+        /// <summary>
+        /// List of users scheduled transactions
+        /// </summary>
         private List<string> _scheduledTransactions;
+
+        /// <summary>
+        /// The current user
+        /// </summary>
         private string _username;
 
         
+        /// <summary>
+        /// An array containing each date label
+        /// </summary>
         private Label[] _dates;
+
+        /// <summary>
+        /// An array containing each information label
+        /// </summary>
         private Label[] _info;
+
+        /// <summary>
+        /// An array containing each panel
+        /// </summary>
         private Panel[] _panels;
 
+        /// <summary>
+        /// The current month on the display
+        /// </summary>
         private int _month;
+
+        /// <summary>
+        /// The current year on the display
+        /// </summary>
         private int _year;
         
+        /// <summary>
+        /// Creates a new calender for the user
+        /// </summary>
+        /// <param name="username">The current user</param>
         public CalenderForm(string username)
         {
             InitializeComponent();
@@ -32,7 +69,7 @@ namespace MoneyManager
             _month = DateTime.Now.Month;
             _year = DateTime.Now.Year;
 
-            //JUST GET NUMBER FROM PANEL AND USE MONTH TO CHECK DATES NO DICTONARY
+            
             
             
             Label [] dates = {
@@ -72,7 +109,9 @@ namespace MoneyManager
         }
 
     
-
+        /// <summary>
+        /// Updates the display calender with important information.
+        /// </summary>
         public void updateDisplay()
         {
             for(int i = 0; i < 42; i++)
@@ -84,7 +123,7 @@ namespace MoneyManager
             _userTransactions = DataManager.getTransactionInfo(_username);
             _userGoals = DataManager.loadGoals(_username);
             _scheduledTransactions = DataManager.getScheduledTransactions(_username);
-            uxMonthLabel.Text = getMonth(_month) + _year;
+            uxMonthLabel.Text = getMonth(_month) + " " + _year;
 
             int daysinmonth = DateTime.DaysInMonth(_year, _month);
             DateTime startDay = new DateTime(_year,_month,1);
@@ -97,12 +136,21 @@ namespace MoneyManager
             {
                 if (i < start || i > daysinmonth + start - 1)
                 {
-                    //panelSwitch(i, "Empty ", "Nothing");
                     _panels[i].BackColor = Control.DefaultBackColor;
                 }
                 else
                 {
                     _panels[i].BackColor = Color.White;
+                    for (int j = 0; j < _userTransactions.Count; j++)
+                    {
+                        string date = _userTransactions[j].Split(',')[3];
+                        DateTime temp = Convert.ToDateTime(date);
+                        if (temp.Month == startDay.Month && temp.Day == (i + 1 - start) && temp.Year == _year)
+                        {
+                            _panels[i].BackColor = Color.LightSlateGray;
+                        }
+                    }
+                    
                     string info = "";
                     for (int j = 0; j < _userGoals.Count; j++)
                     {
@@ -132,19 +180,13 @@ namespace MoneyManager
             }
         }
 
-        private void label1_MouseHover(object sender, EventArgs e)
-        {
-            MessageBox.Show("DATE");
-        }
-
-        private void getStartingPoint(string day)
-        {
-            switch (day)
-            {
-
-            }
-        }
-
+       
+        /// <summary>
+        /// This updates the text withen a panel on the calender
+        /// </summary>
+        /// <param name="postion">Where to put the day on the calender</param>
+        /// <param name="date">The day</param>
+        /// <param name="info">Information for that day</param>
         private void panelSwitch(int postion, string date, string info) //Date is like 11/17 
         {
             _dates[postion].Text = date;
@@ -153,6 +195,11 @@ namespace MoneyManager
             _info[postion].Text += info;
         }
 
+        /// <summary>
+        /// Updates the current months/years number based on the buttons at the top of the page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxLastMonth_Click(object sender, EventArgs e)
         {
             if(_month > 1)
@@ -167,6 +214,11 @@ namespace MoneyManager
             updateDisplay();
         }
 
+        /// <summary>
+        /// Updates the current months/years number based on the buttons at the top of the page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxNextMonth_Click(object sender, EventArgs e)
         {
             if(_month < 12)
@@ -219,11 +271,13 @@ namespace MoneyManager
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
+        
 
-        }
-
+        /// <summary>
+        /// When a panel is clicked all a user information for that day will be displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panel_Click(object sender,EventArgs e)
         {
             Panel p = (Panel)sender;
@@ -246,7 +300,7 @@ namespace MoneyManager
                 
                 if (date.Year == _year && date.Month == _month && date.Day == day)
                 {
-                    temp += "$" + transactionInfo[1] + transactionInfo[2] + "\n";
+                    temp += "$" + transactionInfo[1] + " "+ transactionInfo[2] + "\n";
                     itemCount++;
                 }
             }

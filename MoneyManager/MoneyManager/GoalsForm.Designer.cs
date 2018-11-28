@@ -164,8 +164,8 @@
             this.Controls.Add(this.uxGoalsListView);
             this.MaximizeBox = false;
             this.Name = "GoalsForm";
-            this.Text = "GoalsForm";
-            this.Load += new System.EventHandler(this.GoalsForm_Load);
+            this.Text = "Goals";
+//            this.Load += new System.EventHandler(this.GoalsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -31,6 +31,7 @@ namespace MoneyManager
             {
                 uxCatagoryPicker.Items.Add(categories[i]);
             }
+            
         }
 
         /// <summary>
@@ -125,6 +126,8 @@ namespace MoneyManager
             }
         }
 
+        
+
         /// <summary>
         /// Check if transaction date is between start date and end date
         /// </summary>
@@ -135,7 +138,8 @@ namespace MoneyManager
         private bool CheckDates(DateTime dt1, DateTime dt2, string [] info)
         {
             DateTime dt = Convert.ToDateTime(info[3]);
-            if (dt >= dt1 && dt <= dt2)
+            
+            if (dt.Date >= dt1.Date && dt.Date <= dt2.Date)
             {
                 return true;
             }
@@ -153,22 +157,31 @@ namespace MoneyManager
                 double amount = Convert.ToDouble(info[1]);
                 if (uxAboveRadioButton.Checked)
                 {
-                    if (amount > checkAmount)
+                    if (amount >= checkAmount)
                     {
                         updateSearchDisplay(Convert.ToInt32(info[0]), Convert.ToDouble(info[1]), info[2], info[3], info[4]);
                     }
                 }
                 else if (uxBelowRadioButton.Checked)
                 {
-                    if (amount < checkAmount)
+                    if (amount <= checkAmount)
                     {
                         updateSearchDisplay(Convert.ToInt32(info[0]), Convert.ToDouble(info[1]), info[2], info[3], info[4]);
                     }
                 }
                 else if (uxRangeRadioButton.Checked)
                 {
-                    double range = Convert.ToDouble(uxRangeBox.Text);
-                    if (amount < checkAmount + range && amount > checkAmount - range)
+                    double range;
+                    try
+                    {
+                        range = Convert.ToDouble(uxRangeBox.Text);
+                    }
+                    catch(Exception ex)
+                    {
+                        range = 0;
+                    }
+                    
+                    if (amount <= checkAmount + range && amount >= checkAmount - range)
                     {
                         updateSearchDisplay(Convert.ToInt32(info[0]), Convert.ToDouble(info[1]), info[2], info[3], info[4]);
                     }
@@ -180,6 +193,16 @@ namespace MoneyManager
                         updateSearchDisplay(Convert.ToInt32(info[0]), Convert.ToDouble(info[1]), info[2], info[3], info[4]);
                     }
                 }
+        }
+
+        /// <summary>
+        /// Checks to see if amount box and range box are in the correct format.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckAmounts(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -219,7 +242,19 @@ namespace MoneyManager
             }
             else
             {
-                uxSearchButton.Enabled = false;
+                if (uxAmountSearchBox.Text.Length > 0)
+                {
+                    try
+                    {
+                        Convert.ToDouble(uxAmountSearchBox.Text);
+                        uxSearchButton.Enabled = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        uxSearchButton.Enabled = false;
+                    }
+                }
+                //uxSearchButton.Enabled = false;
             }
         }
 

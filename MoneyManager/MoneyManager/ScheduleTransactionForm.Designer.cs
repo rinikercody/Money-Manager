@@ -38,7 +38,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.uxDescriptionBox = new System.Windows.Forms.TextBox();
             this.uxScheduledTransactionListView = new System.Windows.Forms.ListView();
-            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TakenOut = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -52,6 +51,7 @@
             this.uxFrequencyWeeks = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.uxOneTimeCheckBox = new System.Windows.Forms.CheckBox();
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -137,12 +137,12 @@
             // uxScheduledTransactionListView
             // 
             this.uxScheduledTransactionListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Id,
             this.Amount,
             this.TakenOut,
             this.columnHeader,
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.ID});
             this.uxScheduledTransactionListView.FullRowSelect = true;
             this.uxScheduledTransactionListView.GridLines = true;
             this.uxScheduledTransactionListView.Location = new System.Drawing.Point(461, 8);
@@ -151,10 +151,7 @@
             this.uxScheduledTransactionListView.TabIndex = 41;
             this.uxScheduledTransactionListView.UseCompatibleStateImageBehavior = false;
             this.uxScheduledTransactionListView.View = System.Windows.Forms.View.Details;
-            // 
-            // Id
-            // 
-            this.Id.Text = "Id";
+            this.uxScheduledTransactionListView.SelectedIndexChanged += new System.EventHandler(this.uxScheduledTransactionListView_SelectedIndexChanged);
             // 
             // Amount
             // 
@@ -179,6 +176,7 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Frequency";
+            this.columnHeader2.Width = 100;
             // 
             // uxRemoveTransactionButton
             // 
@@ -298,7 +296,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox uxDescriptionBox;
         private System.Windows.Forms.ListView uxScheduledTransactionListView;
-        private System.Windows.Forms.ColumnHeader Id;
         private System.Windows.Forms.ColumnHeader Amount;
         private System.Windows.Forms.ColumnHeader TakenOut;
         private System.Windows.Forms.ColumnHeader columnHeader;
@@ -312,5 +309,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox uxOneTimeCheckBox;
+        private System.Windows.Forms.ColumnHeader ID;
     }
 }

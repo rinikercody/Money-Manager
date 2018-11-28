@@ -217,7 +217,7 @@
             this.Controls.Add(this.uxStartDate);
             this.MaximizeBox = false;
             this.Name = "GainLossForm";
-            this.Text = "GainLossForm";
+            this.Text = "Gain Loss Report";
             this.ResumeLayout(false);
             this.PerformLayout();
 

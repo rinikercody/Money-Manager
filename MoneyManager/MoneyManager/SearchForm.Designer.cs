@@ -126,6 +126,7 @@
             this.uxAmountSearchBox.Name = "uxAmountSearchBox";
             this.uxAmountSearchBox.Size = new System.Drawing.Size(100, 22);
             this.uxAmountSearchBox.TabIndex = 4;
+            this.uxAmountSearchBox.TextChanged += new System.EventHandler(this.uxStartDateSearch_ValueChanged);
             // 
             // uxKeywordSearchBox
             // 

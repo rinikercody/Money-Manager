@@ -7,18 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SQLite;
+using System.IO;
 
 namespace MoneyManager
 {
     public partial class LoginForm : Form
     {
-
-        //Path to the main sql database for the program.
-        private static string _dbPath = "Data Source=C:\\Users\\rinik\\desktop\\Senior Project\\MoneyManagerDB.db";
-
-        //Connect to database
-        private SQLiteConnection _db = new SQLiteConnection(_dbPath); //Put file path here, might not make this global
 
         /// <summary>
         /// Creates a new LoginForm
@@ -27,7 +21,6 @@ namespace MoneyManager
         {
             InitializeComponent();
             uxLoginPasswordBox.PasswordChar = '*';
-            _db.Open();
         }
 
         /// <summary>
@@ -35,10 +28,7 @@ namespace MoneyManager
         /// </summary>
         public string Username{get;set;}
 
-        /// <summary>
-        /// The password of the person that tryed to log in.
-        /// </summary>
-        public string Password { get; set; }
+        
 
         /// <summary>
         /// For current users that want to login into there account
@@ -49,25 +39,31 @@ namespace MoneyManager
         {
             string username = uxLoginUsernameBox.Text;
             string password = uxLoginPasswordBox.Text;
-            
+            byte[] p = File.ReadAllBytes("User_Manafest");
+            string temp = Encrypter.Decrypt(p,5);
+            string[] arr = temp.Split('\n');
+            bool found = false;
 
-            //Check for user in database
-            string sql = "SELECT * FROM USERS WHERE username ='" + username + "' AND password = '" + password + "';";
-            SQLiteCommand sqlCommand = new SQLiteCommand(sql, _db);
-            SQLiteDataReader results = sqlCommand.ExecuteReader();
-            if (results.Read())
+            for(int i = 0; i < arr.Length - 1; i++)
             {
-                Username = results.GetString(0);
-                Password = results.GetString(1);
-                _db.Close();
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                if (arr[i].Length > 5)
+                {
+                    string[] info = arr[i].Split(',');
+                    MessageBox.Show(info[0] + " " + info[1]);
+                    if (info[0] == username && info[1] == password)
+                    {
+                        Username = username;
+                        found = true;
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+
+                }
             }
-            else
+            if (!found)
             {
-                MessageBox.Show("Incorrect username and password.");
+                MessageBox.Show("Username and password not found.");
             }
-            
         }
 
         /// <summary>
@@ -80,31 +76,45 @@ namespace MoneyManager
             //Create users in text file database
             string username = uxSignUpNameBox.Text;
             string password = uxSignUpPasswordBox.Text;
+            byte[] bytes = File.ReadAllBytes("User_Manafest");
 
-
-            if (username.Length > 2) {
+            if (username.Length > 2 && username.Length < 16) {
                 if (checkPasswordReqirements(password))
                 {
-                    string sql = "SELECT * FROM USERS WHERE username = '" + username + "';";
-                    SQLiteCommand sqlCommand = new SQLiteCommand(sql, _db);
-                    SQLiteDataReader results = sqlCommand.ExecuteReader();
-                    if (results.Read())
+                    bool usernameCheck = true;
+                    string temp = Encrypter.Decrypt(bytes,5);
+                    string[] arr = temp.Split('\n');
+                    for(int i = 0; i < arr.Length - 1; i++)
                     {
-                        MessageBox.Show("Username is already taken.");
+                        string[] info = arr[i].Split(',');
+                        if(info[0] == username)
+                        {
+                            usernameCheck = false;
+                        }
                     }
-                    else
+                    if (usernameCheck)
                     {
+                        string info = username +"," + password + "\n";
 
-                        sql = "INSERT INTO USERS VALUES('" + username + "','" + password + "');";
-                        sqlCommand = new SQLiteCommand(sql, _db);
-                        sqlCommand.ExecuteNonQuery();
+                        byte[] newBytes = Encrypter.Encrypt(info,5);
+                       
 
+                        using (var stream = new FileStream("User_Manafest", FileMode.Append))
+                        {
+                            stream.Write(newBytes, 0, newBytes.Length);
+                        }
+
+                       
+                        
                         Username = username;
-                        Password = password;
-                        _db.Close();
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
+                    else
+                    {
+                        MessageBox.Show("The username you entered is already taken.");
+                    }
+                 
                 }
                 else
                 {
@@ -113,12 +123,16 @@ namespace MoneyManager
             }
             else
             {
-                MessageBox.Show("Username must be at least 3 characters long.");
+                MessageBox.Show("Username must be at least 3 characters long and at most 15 characters long.");
             }
         }
 
       
-
+        /// <summary>
+        /// Checks to see if password is at least 7 characters long, has at least one uppercase letter and dosn't contain any banned characters.
+        /// </summary>
+        /// <param name="password">The password that is being checked</param>
+        /// <returns>True if the password is ok and false if there something wrong with it.</returns>
         private bool checkPasswordReqirements(string password)
         {
             bool check = false;

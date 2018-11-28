@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.Security.Cryptography;
+using System.Data.SQLite;
+
 
 namespace MoneyManager
 {
@@ -28,8 +29,13 @@ namespace MoneyManager
         /// </summary>
         private static string _pathToScheduledTransactions = "Scheduled_Transactions\\";
 
-
-        private static void saveData(string path, List<string> info) 
+        /// <summary>
+        /// Used to save data for all types of transactions
+        /// </summary>
+        /// <param name="path">The path of the file to write to</param>
+        /// <param name="key">Key of the user whos data is being Look up</param>
+        /// <param name="info">The list of information to write</param>
+        private static void saveData(string path,byte key, List<string> info) 
         {
             string temp = "";
             for(int i = 0; i < info.Count; i++)
@@ -37,16 +43,21 @@ namespace MoneyManager
                 temp += info[i] + "\n";
             }
 
-            byte[] bytes = Encrypter.Encrypt(temp);
+            byte[] bytes = Encrypter.Encrypt(temp,key);
 
             File.WriteAllBytes(path, bytes);
         }
 
-        private static List<string> readInData(string path)
+        /// <summary>
+        /// Reads in all a users data
+        /// </summary>
+        /// <param name="path">The file to read from</param>
+        /// <param name="key">Key of the user whos data is being saved</param>
+        /// <returns>A list with all the information read in</returns>
+        private static List<string> readInData(string path, byte key)
         {
-            
             byte[] bytes = File.ReadAllBytes(path);
-            string temp = Encrypter.Decrypt(bytes);
+            string temp = Encrypter.Decrypt(bytes,key);
 
             List<string> result = new List<string>();
             string [] tempArray = temp.Split('\n');
@@ -62,6 +73,8 @@ namespace MoneyManager
             return result;
         }
 
+        /////////////////////////////All methods below this point just call the above methods.//////////////////////////////////
+
         /// <summary>
         /// Reads in all of a user goal information and returns it.
         /// </summary>
@@ -75,7 +88,7 @@ namespace MoneyManager
                 if (File.Exists(_pathToGoals + username))
                 {
                     
-                    return readInData(_pathToGoals + username);
+                    return readInData(_pathToGoals + username,(byte)username.Length);
                 }
                 
                 
@@ -93,7 +106,7 @@ namespace MoneyManager
             if (username != "NOUSER")
             {
                
-                saveData(_pathToGoals + username, userGoals);
+                saveData(_pathToGoals + username,(byte)username.Length, userGoals);
             }
         }
 
@@ -108,7 +121,7 @@ namespace MoneyManager
             {
                 if (File.Exists(_pathToUsers + username))
                 {
-                    return readInData(_pathToUsers + username);
+                    return readInData(_pathToUsers + username,(byte)username.Length);
                 }
             }
             return new List<string>(); //return empty list
@@ -123,7 +136,7 @@ namespace MoneyManager
         {
             if (username != "NOUSER")
             {
-                saveData(_pathToUsers + username, userTransactions);
+                saveData(_pathToUsers + username, (byte)username.Length, userTransactions);
             }
         }
 
@@ -139,7 +152,7 @@ namespace MoneyManager
                 if (File.Exists(_pathToScheduledTransactions + username))
                 {
                   
-                    return readInData(_pathToScheduledTransactions + username);
+                    return readInData(_pathToScheduledTransactions + username,(byte)username.Length);
                 }
             }
             return new List<string>(); //Return empty list
@@ -154,7 +167,7 @@ namespace MoneyManager
         {
             if (username != "NOUSER")
             {
-                saveData(_pathToScheduledTransactions + username, scheduledTransactions);
+                saveData(_pathToScheduledTransactions + username,(byte)username.Length, scheduledTransactions);
             }
         }
 

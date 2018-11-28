@@ -47,7 +47,14 @@ namespace MoneyManager
             for(int i = 0; i < _categories.Count; i++)
             {
                 ListViewItem item = new ListViewItem();
-                item.Text = _categories[i];
+                if (_categories[i] == "")
+                {
+                    item.Text = "No Category";
+                }
+                else
+                {
+                    item.Text = _categories[i];
+                }
                 item.UseItemStyleForSubItems = false;
                 double[] gl = new double [2];
                 if (uxUseDatesBox.Checked)
@@ -97,7 +104,7 @@ namespace MoneyManager
         /// <summary>
         /// Calculates a simple gain loss for the category.
         /// </summary>
-        /// <param name="category"></param>
+        /// <param name="category">The category the transaction is under</param>
         /// <returns></returns>
         public double[] getGainLoss(string category)
         {
@@ -137,7 +144,7 @@ namespace MoneyManager
             {
                 string[] info = _userTransactions[i].Split(',');
                 DateTime dt3 = Convert.ToDateTime(info[3]);
-                if (dt3 > dt1 && dt3 < dt2)
+                if (dt3.Date > dt1.Date && dt3.Date < dt2.Date)
                 {
                     if (info[4] == category)
                     {

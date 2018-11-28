@@ -212,7 +212,7 @@
             // 
             this.uxMonthLabel.AutoSize = true;
             this.uxMonthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxMonthLabel.Location = new System.Drawing.Point(585, 9);
+            this.uxMonthLabel.Location = new System.Drawing.Point(541, 9);
             this.uxMonthLabel.Name = "uxMonthLabel";
             this.uxMonthLabel.Size = new System.Drawing.Size(79, 29);
             this.uxMonthLabel.TabIndex = 0;
@@ -228,7 +228,7 @@
             this.panel1.Size = new System.Drawing.Size(172, 104);
             this.panel1.TabIndex = 1;
             this.panel1.Click += new System.EventHandler(this.panel_Click);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+//            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // uxInfo1
             // 
@@ -1017,7 +1017,7 @@
             // 
             // uxLastMonth
             // 
-            this.uxLastMonth.Location = new System.Drawing.Point(465, 15);
+            this.uxLastMonth.Location = new System.Drawing.Point(328, 9);
             this.uxLastMonth.Name = "uxLastMonth";
             this.uxLastMonth.Size = new System.Drawing.Size(75, 23);
             this.uxLastMonth.TabIndex = 11;

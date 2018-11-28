@@ -61,11 +61,18 @@ namespace MoneyManager
             }
         }
 
+        /*
         private void GoalsForm_Load(object sender, EventArgs e)
         {
 
         }
+        */
 
+        /// <summary>
+        /// Determine weather or not a goal can be added and will enable/disable buttons accordingly.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkGoal(object sender, EventArgs e)
         {
             try
