@@ -314,8 +314,8 @@ namespace MoneyManager
             temp = "Goals:\n";
             for (int i = 0; i < _userGoals.Count; i++)
             {
-                string[] transactionInfo = _userTransactions[i].Split(',');
-                DateTime date = Convert.ToDateTime(transactionInfo[3]);
+                string[] transactionInfo = _userGoals[i].Split(',');
+                DateTime date = Convert.ToDateTime(transactionInfo[2]);
 
                 if (date.Year == _year && date.Month == _month && date.Day == day)
                 {

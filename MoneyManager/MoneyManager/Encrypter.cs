@@ -24,15 +24,16 @@ namespace MoneyManager
             for(int i = data.Length - 1; i > -1; i--)
             {
                 str += data[i];
+                str += (char)(i + 41 + key);
             }
            
             
             byte[] bytes = Encoding.ASCII.GetBytes(str);
 
-            byte b = (byte)bytes.Length;
+     
             for (int i = 0; i < bytes.Length; i++)
             {
-                bytes[i] += 2;
+                bytes[i] += key;
             }
             return bytes;
         }
@@ -50,14 +51,14 @@ namespace MoneyManager
 
             for (int i = 0; i < bytes.Length; i++)
             {
-                bytes[i] -= 2;
+                bytes[i] -= key;
             }
             
             temp = Encoding.ASCII.GetString(bytes);
             
             string str = "";
 
-            for (int i = temp.Length - 1; i > -1; i--)
+            for (int i = temp.Length - 2; i > -1; i -= 2)
             {
                 str += temp[i];
             }

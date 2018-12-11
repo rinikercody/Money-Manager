@@ -43,15 +43,17 @@
             this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxRemoveTransactionButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.uxFrequencyMonths = new System.Windows.Forms.TextBox();
-            this.uxFrequencyWeeks = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.uxOneTimeCheckBox = new System.Windows.Forms.CheckBox();
-            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.uxWeekUpDown = new System.Windows.Forms.NumericUpDown();
+            this.uxMonthUpDown = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.uxWeekUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxMonthUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -178,6 +180,10 @@
             this.columnHeader2.Text = "Frequency";
             this.columnHeader2.Width = 100;
             // 
+            // ID
+            // 
+            this.ID.Text = "Id";
+            // 
             // uxRemoveTransactionButton
             // 
             this.uxRemoveTransactionButton.Enabled = false;
@@ -216,22 +222,6 @@
             this.label5.TabIndex = 45;
             this.label5.Text = "Weeks:";
             // 
-            // uxFrequencyMonths
-            // 
-            this.uxFrequencyMonths.Location = new System.Drawing.Point(101, 222);
-            this.uxFrequencyMonths.Name = "uxFrequencyMonths";
-            this.uxFrequencyMonths.Size = new System.Drawing.Size(100, 22);
-            this.uxFrequencyMonths.TabIndex = 46;
-            this.uxFrequencyMonths.TextChanged += new System.EventHandler(this.checkAdd);
-            // 
-            // uxFrequencyWeeks
-            // 
-            this.uxFrequencyWeeks.Location = new System.Drawing.Point(101, 250);
-            this.uxFrequencyWeeks.Name = "uxFrequencyWeeks";
-            this.uxFrequencyWeeks.Size = new System.Drawing.Size(100, 22);
-            this.uxFrequencyWeeks.TabIndex = 47;
-            this.uxFrequencyWeeks.TextChanged += new System.EventHandler(this.checkAdd);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -244,6 +234,8 @@
             // uxOneTimeCheckBox
             // 
             this.uxOneTimeCheckBox.AutoSize = true;
+            this.uxOneTimeCheckBox.Checked = true;
+            this.uxOneTimeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.uxOneTimeCheckBox.Location = new System.Drawing.Point(101, 195);
             this.uxOneTimeCheckBox.Name = "uxOneTimeCheckBox";
             this.uxOneTimeCheckBox.Size = new System.Drawing.Size(92, 21);
@@ -252,16 +244,43 @@
             this.uxOneTimeCheckBox.UseVisualStyleBackColor = true;
             this.uxOneTimeCheckBox.CheckedChanged += new System.EventHandler(this.checkAdd);
             // 
+            // uxWeekUpDown
+            // 
+            this.uxWeekUpDown.Enabled = false;
+            this.uxWeekUpDown.Location = new System.Drawing.Point(101, 251);
+            this.uxWeekUpDown.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.uxWeekUpDown.Name = "uxWeekUpDown";
+            this.uxWeekUpDown.Size = new System.Drawing.Size(120, 22);
+            this.uxWeekUpDown.TabIndex = 50;
+            // 
+            // uxMonthUpDown
+            // 
+            this.uxMonthUpDown.Enabled = false;
+            this.uxMonthUpDown.Location = new System.Drawing.Point(101, 222);
+            this.uxMonthUpDown.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.uxMonthUpDown.Name = "uxMonthUpDown";
+            this.uxMonthUpDown.Size = new System.Drawing.Size(120, 22);
+            this.uxMonthUpDown.TabIndex = 51;
+            this.uxMonthUpDown.ValueChanged += new System.EventHandler(this.uxMonthUpDown_ValueChanged);
+            // 
             // ScheduleTransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(1415, 450);
+            this.Controls.Add(this.uxMonthUpDown);
+            this.Controls.Add(this.uxWeekUpDown);
             this.Controls.Add(this.uxOneTimeCheckBox);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.uxFrequencyWeeks);
-            this.Controls.Add(this.uxFrequencyMonths);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label9);
@@ -279,6 +298,8 @@
             this.MaximizeBox = false;
             this.Name = "ScheduleTransactionForm";
             this.Text = "Scheduled Transactions";
+            ((System.ComponentModel.ISupportInitialize)(this.uxWeekUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxMonthUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,11 +325,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox uxFrequencyMonths;
-        private System.Windows.Forms.TextBox uxFrequencyWeeks;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox uxOneTimeCheckBox;
         private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.NumericUpDown uxWeekUpDown;
+        private System.Windows.Forms.NumericUpDown uxMonthUpDown;
     }
 }

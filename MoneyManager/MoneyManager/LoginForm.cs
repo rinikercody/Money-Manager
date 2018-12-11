@@ -13,7 +13,7 @@ namespace MoneyManager
 {
     public partial class LoginForm : Form
     {
-
+        
         /// <summary>
         /// Creates a new LoginForm
         /// </summary>
@@ -49,7 +49,6 @@ namespace MoneyManager
                 if (arr[i].Length > 5)
                 {
                     string[] info = arr[i].Split(',');
-                    MessageBox.Show(info[0] + " " + info[1]);
                     if (info[0] == username && info[1] == password)
                     {
                         Username = username;

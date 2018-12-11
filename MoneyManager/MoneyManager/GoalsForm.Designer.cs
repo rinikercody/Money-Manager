@@ -86,9 +86,9 @@
             // uxAddGoalButton
             // 
             this.uxAddGoalButton.Enabled = false;
-            this.uxAddGoalButton.Location = new System.Drawing.Point(348, 635);
+            this.uxAddGoalButton.Location = new System.Drawing.Point(357, 635);
             this.uxAddGoalButton.Name = "uxAddGoalButton";
-            this.uxAddGoalButton.Size = new System.Drawing.Size(298, 23);
+            this.uxAddGoalButton.Size = new System.Drawing.Size(289, 23);
             this.uxAddGoalButton.TabIndex = 35;
             this.uxAddGoalButton.Text = "Add Goal";
             this.uxAddGoalButton.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             // 
             this.uxGoalDate.Location = new System.Drawing.Point(108, 636);
             this.uxGoalDate.Name = "uxGoalDate";
-            this.uxGoalDate.Size = new System.Drawing.Size(234, 22);
+            this.uxGoalDate.Size = new System.Drawing.Size(243, 22);
             this.uxGoalDate.TabIndex = 34;
             this.uxGoalDate.ValueChanged += new System.EventHandler(this.checkGoal);
             // 
@@ -165,7 +165,6 @@
             this.MaximizeBox = false;
             this.Name = "GoalsForm";
             this.Text = "Goals";
-//            this.Load += new System.EventHandler(this.GoalsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

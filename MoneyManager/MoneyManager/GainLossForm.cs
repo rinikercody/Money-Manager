@@ -144,7 +144,7 @@ namespace MoneyManager
             {
                 string[] info = _userTransactions[i].Split(',');
                 DateTime dt3 = Convert.ToDateTime(info[3]);
-                if (dt3.Date > dt1.Date && dt3.Date < dt2.Date)
+                if (dt3.Date >= dt1.Date && dt3.Date <= dt2.Date)
                 {
                     if (info[4] == category)
                     {
@@ -170,6 +170,17 @@ namespace MoneyManager
         /// <param name="e"></param>
         private void uxUseDatesBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (!uxUseDatesBox.Checked)
+            {
+                uxStartDate.Enabled = false;
+                uxEndDate.Enabled = false;
+            }
+            else
+            {
+                uxStartDate.Enabled = true;
+                uxEndDate.Enabled = true;
+            }
+
             updateDisplay();
         }
     }

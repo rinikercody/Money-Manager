@@ -55,18 +55,12 @@ namespace MoneyManager
                 double amount = Convert.ToDouble(info[0]);
                 item.Text = amount.ToString("c");
                 item.SubItems.Add(info[1]);
-                item.SubItems.Add(info[2]);
+                DateTime dt = Convert.ToDateTime(info[2]);
+                item.SubItems.Add(dt.ToString("MM/dd/yyyy"));
                 uxGoalsListView.Items.Add(item);
                 //Want to highlight nearest goals
             }
         }
-
-        /*
-        private void GoalsForm_Load(object sender, EventArgs e)
-        {
-
-        }
-        */
 
         /// <summary>
         /// Determine weather or not a goal can be added and will enable/disable buttons accordingly.
@@ -110,12 +104,7 @@ namespace MoneyManager
         {
             double amount = Convert.ToDouble(uxGoalAmountBox.Text);
             string description = uxGoalDescriptionBox.Text;
-            //string date = uxGoalDate.Value.ToString();
-            //_userGoals.Add(amount + "," + description + "," + date);
-            //DataManager.saveGoals(_userGoals, _username);
-
-
-
+            
             DateTime goalDate = uxGoalDate.Value;
             string saveInfo = amount + "," + description + "," + goalDate.ToString();
 

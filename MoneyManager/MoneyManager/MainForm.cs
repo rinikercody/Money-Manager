@@ -69,25 +69,6 @@ namespace MoneyManager
 
                 updateDisplay(); //Display information to user
 
-            /*
-            string saveData = "";
-            for (int i = 0; i < _userTransactions.Count; i++)
-            {
-                saveData += _userTransactions[i] + "\n";
-            }
-            byte[] encrypted;
-            using (RijndaelManaged myRijndael = new RijndaelManaged())
-            {
-                myRijndael.GenerateKey();
-                myRijndael.GenerateIV();
-                encrypted = Encrypter.EncryptStringToBytes(saveData, myRijndael.Key, myRijndael.IV);
-                string roundtrip = Encrypter.DecryptStringFromBytes(encrypted, myRijndael.Key, myRijndael.IV);
-                MessageBox.Show(roundtrip);
-            }
-            */
-
-
-
         }
 
         ///////////////////////////////Updates the view/////////////////////////////////////////////////
@@ -157,20 +138,14 @@ namespace MoneyManager
             uxGoalsLabel.Text = "";
             uxGoalsLabel.ForeColor = Color.Blue;
 
-            /*
-            for(int i = 0; i < _userGoals.Count; i++)
-            {
-                MessageBox.Show(_userGoals[i]);
-            }
-            */
-
             for (int i = 0; i < 5 && i < _userGoals.Count; i++)
             {
                 string[] info = _userGoals[i].Split(',');
                 uxGoalsLabel.Text += "Goal " + (i + 1) + ":\n";
                 uxGoalsLabel.Text += "Amount: " + info[0] + "\n";
                 uxGoalsLabel.Text += "Description: " + info[1] + "\n";
-                uxGoalsLabel.Text += "By: " + info[2] + "\n\n";
+                DateTime dt = Convert.ToDateTime(info[2]);
+                uxGoalsLabel.Text += "By: " + dt.ToString("MM/dd/yyyy") + "\n\n";
             }
         }
 
@@ -305,7 +280,7 @@ namespace MoneyManager
         /// <param name="username">The current user</param>
         private void checkScheduleTransactions(DateTime currentDate, string username)
         {
-           
+            _scheduledTransactions = DataManager.getScheduledTransactions(_username);
             string[] info;
             int i = 0;
             int limit = _scheduledTransactions.Count;
@@ -313,10 +288,12 @@ namespace MoneyManager
             {
                 info = _scheduledTransactions[i].Split(',');
                 DateTime dt = Convert.ToDateTime(info[5]);
+                //MessageBox.Show("Date " + dt.ToString() + " Now " + currentDate.ToString());
                 if (dt <= currentDate)
                 {
                     //Take out scheduled
                     addTransaction(Convert.ToDouble(info[1]), info[2], info[4], info[3]);
+                    //MessageBox.Show("ADDED Transaction");
                     //Now edit scheduled transaction
                     DateTime endDate = Convert.ToDateTime(info[5]);
                     string[] frequency = info[6].Split('/');
@@ -344,9 +321,9 @@ namespace MoneyManager
                         _scheduledTransactions[i] = newSaveInfo;
                     }
                     i = -1; //Restart loop after taking something out
+                    DataManager.saveScheduledTransactions(_scheduledTransactions, _username);
                     limit = _scheduledTransactions.Count;
                 }
-                
             } //End forloop
             DataManager.saveScheduledTransactions(_scheduledTransactions, _username);
         }
@@ -390,7 +367,7 @@ namespace MoneyManager
                     int checkID = Convert.ToInt32(_userTransactions[i].Split(',')[0]);
                     if (id == checkID)
                     {
-
+                        //Do nothing
                     }
                     else
                     {
@@ -552,7 +529,10 @@ namespace MoneyManager
         private void sheduledTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ScheduleTransactionForm stf = new ScheduleTransactionForm(_username);
-            stf.Show();
+            stf.ShowDialog();
+            DateTime test = new DateTime(2018, 12, 30);
+            checkScheduleTransactions(DateTime.Now,_username);
+            updateDisplay();
         }
 
         /// <summary>
@@ -565,8 +545,6 @@ namespace MoneyManager
             GoalsForm gf = new GoalsForm(_username);
             gf.ShowDialog();
             updateDisplay();
-            //Update goal display on main page after
-
         }
 
         /// <summary>
@@ -602,10 +580,14 @@ namespace MoneyManager
         /// <param name="e"></param>
         private void uxClockTimer_Tick(object sender, EventArgs e)
         {
-            //uxCurrentTimeLabel.Text = "Today: " + getMonth(DateTime.Now.Month) + " " + DateTime.Now.Day + "," + DateTime.Now.ToString("hh:mm");
-            uxCurrentTimeLabel.Text = "Today: " + getMonth(DateTime.Now.Month) + " " + DateTime.Now.ToString("dd, yyyy Time:  hh:mm");
+            uxCurrentTimeLabel.Text = "Today: " + getMonth(DateTime.Now.Month) + " " + DateTime.Now.Day + ", Time: " + DateTime.Now.ToString("hh:mm");
         }
 
+        /// <summary>
+        /// Brings up calender form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxCalenderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CalenderForm c = new CalenderForm(_username);
