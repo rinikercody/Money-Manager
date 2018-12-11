@@ -49,6 +49,7 @@
             // 
             // uxStartDate
             // 
+            this.uxStartDate.Enabled = false;
             this.uxStartDate.Location = new System.Drawing.Point(16, 92);
             this.uxStartDate.Name = "uxStartDate";
             this.uxStartDate.Size = new System.Drawing.Size(250, 22);
@@ -57,6 +58,7 @@
             // 
             // uxEndDate
             // 
+            this.uxEndDate.Enabled = false;
             this.uxEndDate.Location = new System.Drawing.Point(347, 89);
             this.uxEndDate.Name = "uxEndDate";
             this.uxEndDate.Size = new System.Drawing.Size(253, 22);

@@ -292,7 +292,7 @@ namespace MoneyManager
                 if (dt <= currentDate)
                 {
                     //Take out scheduled
-                    addTransaction(Convert.ToDouble(info[1]), info[2], info[4], info[3]);
+                    addTransaction(Convert.ToDouble(info[1]), info[2], info[5], info[3]);
                     //MessageBox.Show("ADDED Transaction");
                     //Now edit scheduled transaction
                     DateTime endDate = Convert.ToDateTime(info[5]);

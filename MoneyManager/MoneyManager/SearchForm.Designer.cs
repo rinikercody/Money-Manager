@@ -132,7 +132,7 @@
             // 
             this.uxKeywordSearchBox.Location = new System.Drawing.Point(186, 43);
             this.uxKeywordSearchBox.Name = "uxKeywordSearchBox";
-            this.uxKeywordSearchBox.Size = new System.Drawing.Size(100, 22);
+            this.uxKeywordSearchBox.Size = new System.Drawing.Size(298, 22);
             this.uxKeywordSearchBox.TabIndex = 5;
             // 
             // label2

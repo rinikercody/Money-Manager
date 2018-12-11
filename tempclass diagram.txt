@@ -1,0 +1,43 @@
+MainForm
+Attributes
+-_userGoals: List<string>
+-_userTransactions: List<string>
+Methods
+-getTransactionInfo(string:username)
+-saveTransactionInfo(string:username, string:info)
+-getGoals(string:username)
+-addGoal(string:username)
+-removeGoal(string:username)
+-addScheduledTransaction(string:date, double:amount)
+-removeScheduledTransaction(string:username, int:transactionId)
+-performScheduledTransaction(string:username)
+
+SharedClass
+Attributes
+-_userTransactions: List<string>
+-_userGoals: List<string>
+Methods
+-updateDisplay(lv:ListView, id:int, amount:double, string:description, string:date, string catagory)
+-getGainLoss(dt1:DateTime, dt2:DateTime)
+-getMonth(int:number)
+
+LoginForm
+Attributes
+-username:string
+-password:string
+Methods
+-validateUser(username:string, password:string)
+
+
+SearchForm
+Attributes
+-_userTransactions: List<string>
+Methods
+
+
+GainLossForm
+Attributes
+-_userTransactions: List<string>
+Methods
+
+

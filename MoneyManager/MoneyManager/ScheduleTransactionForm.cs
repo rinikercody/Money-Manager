@@ -254,8 +254,8 @@ namespace MoneyManager
             try
             {
                 Convert.ToDouble(uxAmountBox.Text);
-                if (uxStartDate.Value > DateTime.Now.Date)
-                {
+                //if (uxStartDate.Value > DateTime.Now.Date)
+                //{
                     if (uxDescriptionBox.Text.Length > 0)
                     {
                         if (uxOneTimeCheckBox.Checked)
@@ -291,11 +291,11 @@ namespace MoneyManager
                     {
                         uxAddScheduledTransaction.Enabled = false;
                     }
-                }
+                /*}
                 else
                 {
                     uxAddScheduledTransaction.Enabled = false;
-                }
+                }*/
             }
             catch(Exception ex)
             {
